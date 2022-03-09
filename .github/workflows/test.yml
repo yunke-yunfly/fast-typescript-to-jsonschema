@@ -1,0 +1,19 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn --frozen-lockfile
+      - name: Lint
+        run: yarn lint:all
+      - name: Test
+        run: yarn test
