@@ -145,9 +145,9 @@ interface Interface_4 {
     - [1.5.4数组交叉](example/interface.md#154数组交叉)
     - [1.5.5循环嵌套](example/interface.md#155循环嵌套)
   - [1.6索引类型](example/interface.md#16索引类型)
-- [模块](example/module.md模块)
-  - [1.1简单导出](example/module.md11简单导出)
-  - [1.2导出重命名](example/module.md12导出重命名)
+- [模块](example/module.md#模块)
+  - [1.1简单导出](example/module.md#11简单导出)
+  - [1.2导出重命名](example/module.md#12导出重命名)
 - [继承](example/extends.md#继承)
   - [1.1简单继承](example/extends.md#11简单继承)
   - [1.2多继承](example/extends.md#12多继承)
@@ -188,7 +188,7 @@ interface Interface_4 {
 
 ## 贡献
 
-我们非常欢迎您的贡献，您可以通过以下方式与我们共同建。
+我们非常欢迎您的贡献，您可以通过以下方式与我们共建。
 
 - 提交[GitHub 问题](https://github.com/yunke-yunfly/typescript-to-jsonschema/issues)以报告错误或提出问题。
 - 提出[拉取请求](https://github.com/yunke-yunfly/typescript-to-jsonschema/pulls)以改进我们的代码。
