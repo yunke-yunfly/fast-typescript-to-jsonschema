@@ -1,6 +1,6 @@
 # typescript-to-jsonschema
 
-[![npm version](https://img.shields.io/npm/v/typescript-to-jsonschema.svg)](https://www.npmjs.com/package/typescript-to-jsonschema) ![Test](https://github.com/yunke-yunfly/typescript-to-jsonschema/workflows/Test/badge.svg)
+ ![Test](https://github.com/yunke-yunfly/typescript-to-jsonschema/workflows/Test/badge.svg)
 
 生成typescript类型的jsonschema数据
 
