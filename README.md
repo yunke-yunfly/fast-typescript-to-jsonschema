@@ -1,4 +1,4 @@
-# @yunke/yundoc-json-schema
+# typescript-to-jsonschema
 
 生成 ts 文件类型的 json-schema 数据
 
@@ -9,15 +9,13 @@
 
 ## 使用
 
-- 安装应用包
+- 1.安装依赖
 
 ```js
-yarn add @yunke/yundoc-json-schema
+yarn add typescript-to-jsonschema
 ```
 
-- 使用包
-
-以`test.ts`文件为例，文件内容如下:
+- 2.创建`type.ts`文件，内容如下:
 
 ```ts
 interface ITest {
@@ -27,14 +25,14 @@ interface ITest {
 }
 ```
 
-使用:
+- 3.创建`test.js`文件，内容如下:
 
-```ts
-const { default: genTypeSchema } = require('@yunke/yundoc-json-schema');
+```js
+const { default: genTypeSchema } = require('typescript-to-jsonschema');
 const path = require('path');
 
 // 目标文件
-const file = path.resolve(__dirname, './test.ts');
+const file = path.resolve(__dirname, './type.ts');
 
 // 生成数据
 genTypeSchema.genJsonDataFormFile(file);
@@ -45,8 +43,14 @@ const json = genTypeSchema.genJsonData();
 // 获得具体的某个type的json-schema数据
 const jsonSchema = genTypeSchema.getJsonSchema(file, 'ITest');
 
-// 返回结果如下
+// 返回结果
 console.log(jsonSchema); 
+```
+
+- 4.执行脚本
+
+```js
+node ./test.js
 ```
 
 `jsonSchema`返回结果如下:
