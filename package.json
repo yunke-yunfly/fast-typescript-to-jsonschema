@@ -3,7 +3,7 @@
   "version": "0.0.1-beta.0",
   "main": "./dist/index.js",
   "typings": "dist/index.d.ts",
-  "repository": "https://git.myscrm.cn/yued/demo",
+  "repository": "https://github.com/yunke-yunfly/typescript-to-jsonschema",
   "author": "zane <wangw19@mingyuanyun.com>",
   "license": "MIT",
   "scripts": {
