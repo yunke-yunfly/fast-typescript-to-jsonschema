@@ -1,6 +1,6 @@
 {
-  "name": "@yunke/yundoc-json-schema",
-  "version": "1.0.17",
+  "name": "yundoc-json-schema",
+  "version": "0.0.1-beta.0",
   "main": "./dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": "https://git.myscrm.cn/yued/demo",
