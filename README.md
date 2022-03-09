@@ -188,7 +188,7 @@ interface Interface_4 {
 
 ## 贡献
 
-我们非常欢迎您的贡献，您可以通过以下方式与我们共同建。
+我们非常欢迎您的贡献，您可以通过以下方式与我们共建。
 
 - 提交[GitHub 问题](https://github.com/yunke-yunfly/typescript-to-jsonschema/issues)以报告错误或提出问题。
 - 提出[拉取请求](https://github.com/yunke-yunfly/typescript-to-jsonschema/pulls)以改进我们的代码。
