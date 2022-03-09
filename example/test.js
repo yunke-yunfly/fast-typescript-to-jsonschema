@@ -1,4 +1,4 @@
-const { default: genTypeSchema } = require('typescript-to-jsonschema');
+const { default: genTypeSchema } = require('../dist');
 const path = require('path');
 
 // 目标文件
