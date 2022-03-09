@@ -1,11 +1,11 @@
 # typescript-to-jsonschema
 
-生成 ts 文件类型的 json-schema 数据
+生成 ts 文件类型的 jsonschema 数据
 
 ## 特性
 
 - 编译Typescript文件以获取完整的类型信息
-- 将所需的属性、继承、注释、属性初始值转换为json-schema
+- 将所需的属性、继承、注释、属性初始值转换为jsonschema
 
 ## 使用
 
