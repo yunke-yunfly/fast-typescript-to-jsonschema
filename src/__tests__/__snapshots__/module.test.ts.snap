@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Module多文件全部导出_0 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "ExportAll": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "count": Object {
+          "type": "number",
+        },
+      },
+      "required": Array [
+        "count",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "$ref": "#/definitions/ExportAll",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Module多文件命名空间导出_0 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "nameSpaceExport.User": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "$ref": "#/definitions/nameSpaceExport.User",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Module多文件按组导出_0 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "GroupExport": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "attr": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "attr",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "$ref": "#/definitions/GroupExport",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Module多文件按组默认导出_0 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "GroupDefaultExport": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "$ref": "#/definitions/GroupDefaultExport",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Module多文件默认导出_0 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "DefaultExport": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "$ref": "#/definitions/DefaultExport",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Module重命名模块_0 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "_AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "$ref": "#/definitions/_AAA",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Module重命名模块多文件_0 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "_AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "_User": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr1": Object {
+      "$ref": "#/definitions/_AAA",
+    },
+    "attr2": Object {
+      "$ref": "#/definitions/_User",
+    },
+  },
+  "required": Array [
+    "attr1",
+    "attr2",
+  ],
+  "type": "object",
+}
+`;

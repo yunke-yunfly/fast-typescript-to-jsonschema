@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`工具函数Omit_1 1`] = `
+Object {
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+    "c": Object {
+      "type": "boolean",
+    },
+  },
+  "required": Array [
+    "a",
+    "c",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Omit_2 1`] = `
+Object {
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+  },
+  "required": Array [
+    "a",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Omit_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+    "c": Object {
+      "type": "boolean",
+    },
+  },
+  "required": Array [
+    "a",
+    "c",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Pick_1 1`] = `
+Object {
+  "properties": Object {
+    "b": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "b",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Pick_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "b": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "b",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Record_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "about": Object {
+      "type": "number",
+    },
+    "home": Object {
+      "type": "number",
+    },
+  },
+  "required": Array [
+    "home",
+    "about",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Record_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "about": Object {
+      "type": "string",
+    },
+    "home": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "home",
+    "about",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Record_3 1`] = `
+Object {
+  "additionalProperties": Object {
+    "type": "string",
+  },
+  "properties": Object {
+    "about": Object {
+      "type": "string",
+    },
+    "contact": Object {
+      "type": "string",
+    },
+    "home": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "home",
+    "about",
+    "contact",
+  ],
+  "type": "object",
+}
+`;

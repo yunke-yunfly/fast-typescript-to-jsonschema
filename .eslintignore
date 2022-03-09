@@ -1,0 +1,7 @@
+node_modules
+dist
+*.d.ts
+.vscode
+package.json
+jest.config.js
+.eslintrc.js

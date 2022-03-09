@@ -1,0 +1,384 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Promise_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "type": "object",
+}
+`;
+
+exports[`interface循环嵌套类型 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Other_4": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "age": Object {
+          "type": "number",
+        },
+        "children": Object {
+          "$ref": "#/definitions/Other_4",
+        },
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+        "age",
+        "children",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "age": Object {
+      "type": "number",
+    },
+    "children": Object {
+      "$ref": "#/definitions/Other_4",
+    },
+    "name": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "name",
+    "age",
+    "children",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`interface循环嵌套类型 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Other_4": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "age": Object {
+          "type": "number",
+        },
+        "children": Object {
+          "$ref": "#/definitions/Other_4",
+        },
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+        "age",
+        "children",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "age": Object {
+      "type": "number",
+    },
+    "children": Object {
+      "$ref": "#/definitions/Other_4",
+    },
+    "name": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "name",
+    "age",
+    "children",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`包含错误文件_不影响之前文件_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "BodyPar": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "age": Object {
+          "type": "number",
+        },
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+        "age",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "$ref": "#/definitions/BodyPar",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`获得namespace中的类型 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "name": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`获得ts代码中导出的类型 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "BodyPar": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "age": Object {
+          "type": "number",
+        },
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+        "age",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "$ref": "#/definitions/BodyPar",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`获得已换成的文件 1`] = `
+Array [
+  "/jest/common.ts",
+  "/jest/TestController.ts",
+]
+`;
+
+exports[`获得所有转化之后的JSON Data 1`] = `
+Object {
+  "/jest/TestController.ts": Object {
+    "BodyPar": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "age": Object {
+          "type": "number",
+        },
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+        "age",
+      ],
+      "type": "object",
+    },
+  },
+  "/jest/common.ts": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other10": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other10",
+      ],
+      "type": "object",
+    },
+    "Label": Object {
+      "enum": Array [
+        1,
+        2,
+        3,
+      ],
+      "type": "number",
+    },
+    "Param.C.D.E.F.GetBaseDetailResponse": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "id": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "id",
+      ],
+      "type": "object",
+    },
+    "Param_1.A": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+    "Param_1.Label": Object {
+      "enum": Array [
+        1,
+        2,
+        3,
+      ],
+      "type": "number",
+    },
+  },
+  "/jest/other.ts": Object {
+    "AAA": Object {
+      "$ref": "#/jest/common.ts",
+      "from": "AAA",
+      "type": "ImportSpecifier",
+    },
+    "BBB": Object {
+      "$ref": "#/jest/common.ts",
+      "from": "BBB",
+      "type": "ImportSpecifier",
+    },
+    "BodyPar": Object {
+      "$ref": "#/jest/TestController.ts",
+      "from": "BodyPar",
+      "type": "ImportSpecifier",
+    },
+    "Other_1": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+    "Other_2": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "$ref": "#AAA",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+    "Other_3": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "$ref": "#BBB",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+    "Other_4": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "age": Object {
+          "type": "number",
+        },
+        "children": Object {
+          "$ref": "#Other_4",
+        },
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+        "age",
+        "children",
+      ],
+      "type": "object",
+    },
+    "Other_5": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "$ref": "#BodyPar",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+    "Other_6": Object {
+      "additionalProperties": false,
+      "type": "object",
+    },
+    "Param.A": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+    "Param.Label": Object {
+      "enum": Array [
+        1,
+        2,
+        3,
+      ],
+      "type": "number",
+    },
+  },
+}
+`;

@@ -1,0 +1,5 @@
+**/dist
+**\__snapshots__\**
+**/node_modules
+package.json
+.eslintcache

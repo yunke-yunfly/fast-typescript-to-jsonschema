@@ -1,0 +1,279 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`接口转换为枚举类_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "attr": Object {
+      "enum": Array [
+        "1",
+      ],
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`接口转换为枚举类_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "attr": Object {
+      "enum": Array [
+        "1",
+        "2",
+        "3",
+      ],
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`接口转换为枚举类_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "A": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "attr": Object {
+          "$ref": "#/definitions/B",
+        },
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+        "attr",
+      ],
+      "type": "object",
+    },
+    "B": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name1",
+      ],
+      "type": "object",
+    },
+    "Label": Object {
+      "enum": Array [
+        1,
+        2,
+        3,
+      ],
+      "type": "number",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "anyOf": Array [
+        Object {
+          "$ref": "#/definitions/Label",
+        },
+        Object {
+          "items": Object {
+            "anyOf": Array [
+              Object {
+                "$ref": "#/definitions/A",
+              },
+              Object {
+                "$ref": "#/definitions/B",
+              },
+            ],
+          },
+          "type": "array",
+        },
+        Object {
+          "enum": Array [
+            "1",
+            "2",
+            "3",
+            true,
+            1,
+          ],
+        },
+      ],
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`接口转换为枚举类_4 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "NameSpaceParent.NameSpacechild.NameSpacechildren.A": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "attr": Object {
+          "$ref": "#/definitions/NameSpaceParent.NameSpacechild.NameSpacechildren.B",
+        },
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+        "attr",
+      ],
+      "type": "object",
+    },
+    "NameSpaceParent.NameSpacechild.NameSpacechildren.B": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name1",
+      ],
+      "type": "object",
+    },
+    "NameSpaceParent.NameSpacechild.NameSpacechildren.Label": Object {
+      "enum": Array [
+        1,
+        2,
+        3,
+      ],
+      "type": "number",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "anyOf": Array [
+        Object {
+          "$ref": "#/definitions/NameSpaceParent.NameSpacechild.NameSpacechildren.Label",
+        },
+        Object {
+          "items": Object {
+            "anyOf": Array [
+              Object {
+                "$ref": "#/definitions/NameSpaceParent.NameSpacechild.NameSpacechildren.A",
+              },
+              Object {
+                "$ref": "#/definitions/NameSpaceParent.NameSpacechild.NameSpacechildren.B",
+              },
+            ],
+          },
+          "type": "array",
+        },
+        Object {
+          "enum": Array [
+            "1",
+            "2",
+            "3",
+            true,
+            1,
+          ],
+        },
+      ],
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`枚举_0 1`] = `
+Object {
+  "enum": Array [
+    0,
+    1,
+  ],
+  "type": "number",
+}
+`;
+
+exports[`枚举_1 1`] = `
+Object {
+  "enum": Array [
+    "A",
+    "B",
+    "C",
+  ],
+  "type": "string",
+}
+`;
+
+exports[`枚举_2 1`] = `
+Object {
+  "enum": Array [
+    1,
+    2,
+    3,
+  ],
+  "type": "number",
+}
+`;
+
+exports[`枚举_3 1`] = `
+Object {
+  "enum": Array [
+    1,
+    2,
+    3,
+    4,
+  ],
+  "type": "number",
+}
+`;
+
+exports[`枚举_4 1`] = `
+Object {
+  "enum": Array [
+    0,
+    1,
+  ],
+  "type": "number",
+}
+`;
+
+exports[`枚举_5 1`] = `
+Object {
+  "enum": Array [
+    0,
+    NaN,
+  ],
+  "type": "number",
+}
+`;
+
+exports[`枚举_6 1`] = `
+Object {
+  "enum": Array [
+    1,
+    2,
+    3,
+    4,
+  ],
+  "type": "number",
+}
+`;
+
+exports[`枚举_7_空枚举 1`] = `
+Object {
+  "enum": Array [],
+}
+`;

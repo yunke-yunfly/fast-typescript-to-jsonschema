@@ -1,0 +1,263 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Generic多层对象_类型_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {},
+  "properties": Object {
+    "value1": Object {
+      "properties": Object {
+        "value2": Object {
+          "properties": Object {
+            "value3": Object {
+              "type": "string",
+            },
+          },
+          "required": Array [
+            "value3",
+          ],
+          "type": "object",
+        },
+      },
+      "required": Array [
+        "value2",
+      ],
+      "type": "object",
+    },
+  },
+  "required": Array [
+    "value1",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Generic引用别的文件_类型_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {},
+  "properties": Object {
+    "value1": Object {
+      "type": "string",
+    },
+    "value2": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "value1",
+    "value2",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Generic类型_0 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {},
+  "properties": Object {
+    "value1": Object {
+      "type": "string",
+    },
+    "value2": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "value1",
+    "value2",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Generic类型_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Generic_1<number>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "value1": Object {
+          "items": Object {
+            "type": "number",
+          },
+          "type": "array",
+        },
+      },
+      "required": Array [
+        "value1",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "value1": Object {
+      "type": "string",
+    },
+    "value2": Object {
+      "$ref": "#/definitions/Generic_1<number>",
+    },
+  },
+  "required": Array [
+    "value1",
+    "value2",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Generic类型_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Generic_1<number>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "value1": Object {
+          "items": Object {
+            "type": "number",
+          },
+          "type": "array",
+        },
+      },
+      "required": Array [
+        "value1",
+      ],
+      "type": "object",
+    },
+    "Generic_2<Generic_1<number>>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "value1": Object {
+          "type": "string",
+        },
+        "value2": Object {
+          "$ref": "#/definitions/Generic_1<number>",
+        },
+      },
+      "required": Array [
+        "value1",
+        "value2",
+      ],
+      "type": "object",
+    },
+    "Generic_2<string>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "value1": Object {
+          "type": "string",
+        },
+        "value2": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "value1",
+        "value2",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "value1": Object {
+      "$ref": "#/definitions/Generic_1<number>",
+    },
+    "value2": Object {
+      "$ref": "#/definitions/Generic_2<string>",
+    },
+    "value3": Object {
+      "$ref": "#/definitions/Generic_2<string>",
+    },
+    "value4": Object {
+      "$ref": "#/definitions/Generic_2<Generic_1<number>>",
+    },
+  },
+  "required": Array [
+    "value1",
+    "value2",
+    "value3",
+    "value4",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Generic默认值_类型_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Generic_6<string>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "value": Object {
+          "items": Object {
+            "type": "string",
+          },
+          "type": "array",
+        },
+      },
+      "required": Array [
+        "value",
+      ],
+      "type": "object",
+      "typeParams": Object {
+        "0": Object {
+          "default": Object {
+            "type": "string",
+          },
+          "name": "T",
+        },
+      },
+    },
+  },
+  "properties": Object {
+    "value7": Object {
+      "$ref": "#/definitions/Generic_6<string>",
+    },
+  },
+  "required": Array [
+    "value7",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Generic默认值_类型_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Generic_8<string>": Object {},
+  },
+  "properties": Object {
+    "value": Object {
+      "items": Object {
+        "$realRef": "Generic_8",
+        "$ref": "#/definitions/Generic_8<string>",
+      },
+      "type": "array",
+    },
+  },
+  "required": Array [
+    "value",
+  ],
+  "type": "object",
+  "typeParams": Object {
+    "0": Object {
+      "default": Object {
+        "$realRef": "Generic_8",
+        "$ref": "#Generic_8<string>",
+        "items": Object {
+          "extraParams": Array [
+            Object {
+              "type": "string",
+            },
+          ],
+        },
+      },
+      "name": "T",
+    },
+  },
+}
+`;

@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`单多行注释默认值 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "age": Object {
+      "default": "25",
+      "description": "年龄",
+      "type": "number",
+    },
+    "name": Object {
+      "default": "'zane'",
+      "description": "姓名",
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "name",
+    "age",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`单行注释 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "name": Object {
+      "description": "支持单行注释",
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`单行注释默认值 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "name": Object {
+      "default": "'zane'",
+      "description": "姓名",
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`多行注释 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "name": Object {
+      "description": "支持多行注释",
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`多行注释默认值 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "age": Object {
+      "default": "25",
+      "description": "年龄",
+      "type": "number",
+    },
+  },
+  "required": Array [
+    "age",
+  ],
+  "type": "object",
+}
+`;

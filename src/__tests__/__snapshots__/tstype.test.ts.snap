@@ -1,0 +1,242 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`type类型_1 1`] = `
+Object {
+  "description": "单行备注",
+  "example": "1",
+  "type": "number",
+}
+`;
+
+exports[`type类型_2 1`] = `
+Object {
+  "description": "多行备注",
+  "example": "'zane'",
+  "type": "string",
+}
+`;
+
+exports[`type类型_3 1`] = `
+Object {
+  "anyOf": Array [
+    Object {
+      "type": "string",
+    },
+    Object {
+      "type": "number",
+    },
+  ],
+}
+`;
+
+exports[`type类型_4 1`] = `
+Object {
+  "anyOf": Array [
+    Object {
+      "type": "string",
+    },
+    Object {
+      "type": "number",
+    },
+    Object {
+      "enum": Array [
+        5,
+        true,
+      ],
+    },
+  ],
+}
+`;
+
+exports[`type类型_5 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {},
+  "properties": Object {
+    "other1": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "other1",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`type类型_6 1`] = `
+Object {
+  "anyOf": Array [
+    Object {
+      "$ref": "#/definitions/AAA",
+    },
+    Object {
+      "type": "number",
+    },
+  ],
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+  },
+}
+`;
+
+exports[`type类型_7 1`] = `
+Object {
+  "anyOf": Array [
+    Object {
+      "$ref": "#/definitions/AAA",
+    },
+    Object {
+      "$ref": "#/definitions/Type_1",
+    },
+  ],
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "Type_1": Object {
+      "description": "单行备注",
+      "example": "1",
+      "type": "number",
+    },
+  },
+}
+`;
+
+exports[`type类型_8 1`] = `
+Object {
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "Type_1": Object {
+      "description": "单行备注",
+      "example": "1",
+      "type": "number",
+    },
+  },
+  "items": Object {
+    "anyOf": Array [
+      Object {
+        "$ref": "#/definitions/AAA",
+      },
+      Object {
+        "$ref": "#/definitions/Type_1",
+      },
+    ],
+  },
+  "type": "array",
+}
+`;
+
+exports[`type类型_9 1`] = `
+Object {
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+    "c": Object {
+      "type": "boolean",
+    },
+  },
+  "required": Array [
+    "a",
+    "c",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`type类型_10 1`] = `
+Object {
+  "definitions": Object {},
+  "enum": Array [
+    1,
+    2,
+    3,
+  ],
+  "type": "number",
+}
+`;
+
+exports[`type类型_11 1`] = `
+Object {
+  "definitions": Object {
+    "Label": Object {
+      "enum": Array [
+        1,
+        2,
+        3,
+      ],
+      "type": "number",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "$ref": "#/definitions/Label",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`type类型_数组_1 1`] = `
+Object {
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+  },
+  "items": Object {
+    "$ref": "#/definitions/AAA",
+  },
+  "type": "array",
+}
+`;
+
+exports[`type类型_空对象_1 1`] = `
+Object {
+  "type": "object",
+}
+`;

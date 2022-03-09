@@ -1,0 +1,960 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Interface单类型类型_0 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "attr": Object {
+      "type": "object",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface单类型类型_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "attr": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface单类型类型_1 2`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "attr1": Object {
+      "type": "string",
+    },
+    "attr2": Object {
+      "type": "number",
+    },
+    "attr3": Object {
+      "type": "boolean",
+    },
+  },
+  "required": Array [
+    "attr1",
+    "attr2",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface复杂继承类型_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other10": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other10",
+      ],
+      "type": "object",
+    },
+    "Interface_19": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other2": Object {
+          "type": "number",
+        },
+      },
+      "required": Array [
+        "other2",
+      ],
+      "type": "object",
+    },
+    "Interface_20": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "attr1": Object {
+          "$ref": "#/definitions/Interface_19",
+        },
+        "attr2": Object {
+          "allOf": Array [
+            Object {
+              "$ref": "#/definitions/AAA",
+            },
+            Object {
+              "$ref": "#/definitions/BBB",
+            },
+          ],
+        },
+      },
+      "required": Array [
+        "attr1",
+        "attr2",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "arr": Object {
+      "items": Object {
+        "$ref": "#/definitions/Interface_20",
+      },
+      "type": "array",
+    },
+    "other1": Object {
+      "type": "string",
+    },
+    "other2": Object {
+      "type": "number",
+    },
+  },
+  "required": Array [
+    "other2",
+    "arr",
+    "other1",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface复杂联合类型_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "attr": Object {
+      "anyOf": Array [
+        Object {
+          "type": "string",
+        },
+        Object {
+          "type": "number",
+        },
+        Object {
+          "type": "boolean",
+        },
+        Object {
+          "enum": Array [
+            4,
+            "yunke",
+          ],
+        },
+      ],
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface复杂聚合类型 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other10": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other10",
+      ],
+      "type": "object",
+    },
+    "Param.C.D.E.F.GetBaseDetailResponse": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "id": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "id",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "other1": Object {
+      "type": "string",
+    },
+    "other2": Object {
+      "anyOf": Array [
+        Object {
+          "type": "string",
+        },
+        Object {
+          "type": "number",
+        },
+      ],
+    },
+    "other3": Object {
+      "items": Object {
+        "anyOf": Array [
+          Object {
+            "type": "string",
+          },
+          Object {
+            "type": "number",
+          },
+        ],
+      },
+      "type": "array",
+    },
+    "other4": Object {
+      "$ref": "#/definitions/AAA",
+    },
+    "other5": Object {
+      "allOf": Array [
+        Object {
+          "$ref": "#/definitions/AAA",
+        },
+        Object {
+          "$ref": "#/definitions/BBB",
+        },
+      ],
+    },
+    "other6": Object {
+      "properties": Object {
+        "some": Object {
+          "type": "string",
+        },
+        "some1": Object {
+          "$ref": "#/definitions/BBB",
+        },
+      },
+      "required": Array [
+        "some",
+        "some1",
+      ],
+      "type": "object",
+    },
+    "other8": Object {
+      "properties": Object {
+        "a": Object {
+          "$ref": "#/definitions/Param.C.D.E.F.GetBaseDetailResponse",
+        },
+      },
+      "required": Array [
+        "a",
+      ],
+      "type": "object",
+    },
+  },
+  "required": Array [
+    "other1",
+    "other2",
+    "other3",
+    "other4",
+    "other5",
+    "other6",
+    "other8",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface嵌套类型_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "$ref": "#/definitions/AAA",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface嵌套类型_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other10": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other10",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "anyOf": Array [
+        Object {
+          "$ref": "#/definitions/AAA",
+        },
+        Object {
+          "$ref": "#/definitions/BBB",
+        },
+      ],
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface嵌套类型_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other10": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other10",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "allOf": Array [
+        Object {
+          "$ref": "#/definitions/AAA",
+        },
+        Object {
+          "$ref": "#/definitions/BBB",
+        },
+      ],
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface嵌套类型_4 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other10": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other10",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "items": Object {
+        "allOf": Array [
+          Object {
+            "$ref": "#/definitions/AAA",
+          },
+          Object {
+            "$ref": "#/definitions/BBB",
+          },
+        ],
+      },
+      "type": "array",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface嵌套类型_5 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other10": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other10",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr": Object {
+      "items": Object {
+        "allOf": Array [
+          Object {
+            "$ref": "#/definitions/AAA",
+          },
+          Object {
+            "$ref": "#/definitions/BBB",
+          },
+        ],
+      },
+      "type": "array",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface引用npm包类型_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "JSONSchema4TypeName": Object {},
+  },
+  "properties": Object {
+    "value": Object {
+      "$ref": "#/definitions/JSONSchema4TypeName",
+    },
+  },
+  "required": Array [
+    "value",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface引用过滤文件_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {},
+  },
+  "properties": Object {
+    "attr": Object {
+      "$ref": "#/definitions/AAA",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface无任何属性_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "type": "object",
+}
+`;
+
+exports[`Interface简单数组类型_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "attr": Object {
+      "items": Object {
+        "type": "string",
+      },
+      "type": "array",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface简单数组类型_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "attr": Object {
+      "items": Object {
+        "anyOf": Array [
+          Object {
+            "type": "string",
+          },
+          Object {
+            "type": "number",
+          },
+        ],
+      },
+      "type": "array",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface简单数组类型_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "attr": Object {
+      "items": Object {
+        "anyOf": Array [
+          Object {
+            "type": "string",
+          },
+          Object {
+            "type": "number",
+          },
+        ],
+      },
+      "type": "array",
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface简单联合类型 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "attr": Object {
+      "anyOf": Array [
+        Object {
+          "type": "string",
+        },
+        Object {
+          "type": "number",
+        },
+        Object {
+          "type": "boolean",
+        },
+      ],
+    },
+  },
+  "required": Array [
+    "attr",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface索引类型_1 1`] = `
+Object {
+  "additionalProperties": Object {},
+  "type": "object",
+}
+`;
+
+exports[`Interface索引类型_2 1`] = `
+Object {
+  "additionalProperties": Object {
+    "type": "number",
+  },
+  "type": "object",
+}
+`;
+
+exports[`Interface索引类型_3 1`] = `
+Object {
+  "additionalProperties": Object {
+    "type": "string",
+  },
+  "type": "object",
+}
+`;
+
+exports[`Interface索引类型_4 1`] = `
+Object {
+  "additionalProperties": Object {
+    "$ref": "#/definitions/AAA",
+  },
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`Interface索引类型_5 1`] = `
+Object {
+  "additionalProperties": Object {
+    "anyOf": Array [
+      Object {
+        "$ref": "#/definitions/AAA",
+      },
+      Object {
+        "$ref": "#/definitions/BBB",
+      },
+    ],
+  },
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other10": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other10",
+      ],
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`Interface索引类型_6 1`] = `
+Object {
+  "additionalProperties": Object {
+    "items": Object {
+      "allOf": Array [
+        Object {
+          "$ref": "#/definitions/AAA",
+        },
+        Object {
+          "$ref": "#/definitions/BBB",
+        },
+      ],
+    },
+    "type": "array",
+  },
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other10": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other10",
+      ],
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`Interface索引类型_7 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Interface_13": Object {
+      "additionalProperties": Object {
+        "type": "number",
+      },
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "age": Object {
+      "type": "number",
+    },
+    "children": Object {
+      "$ref": "#/definitions/Interface_13",
+    },
+    "name": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "name",
+    "age",
+    "children",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface索引类型_8 1`] = `
+Object {
+  "additionalProperties": Object {
+    "properties": Object {
+      "name": Object {
+        "type": "string",
+      },
+    },
+    "required": Array [
+      "name",
+    ],
+    "type": "object",
+  },
+  "type": "object",
+}
+`;
+
+exports[`Interface索引类型_9 1`] = `
+Object {
+  "additionalProperties": Object {
+    "properties": Object {
+      "name": Object {
+        "type": "string",
+      },
+      "other": Object {
+        "$ref": "#/definitions/AAA",
+      },
+    },
+    "required": Array [
+      "name",
+      "other",
+    ],
+    "type": "object",
+  },
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`Interface继承类型_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "other1": Object {
+      "type": "string",
+    },
+    "other2": Object {
+      "type": "number",
+    },
+  },
+  "required": Array [
+    "other2",
+    "other1",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Interface继承类型_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other10": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other10",
+      ],
+      "type": "object",
+    },
+    "Interface_19": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+        "other2": Object {
+          "type": "number",
+        },
+      },
+      "required": Array [
+        "other2",
+        "other1",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "attr1": Object {
+      "$ref": "#/definitions/Interface_19",
+    },
+    "attr2": Object {
+      "allOf": Array [
+        Object {
+          "$ref": "#/definitions/AAA",
+        },
+        Object {
+          "$ref": "#/definitions/BBB",
+        },
+      ],
+    },
+  },
+  "required": Array [
+    "attr1",
+    "attr2",
+  ],
+  "type": "object",
+}
+`;

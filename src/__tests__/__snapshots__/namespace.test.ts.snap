@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`namespace案例_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Param.C.D.E.F.GetBaseDetailResponse": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "id": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "id",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "other1": Object {
+      "$ref": "#/definitions/Param.C.D.E.F.GetBaseDetailResponse",
+    },
+  },
+  "required": Array [
+    "other1",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`namespace案例_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Param_1.A": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "other1": Object {
+      "$ref": "#/definitions/Param_1.A",
+    },
+  },
+  "required": Array [
+    "other1",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`namespace案例_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Param_1.Label": Object {
+      "enum": Array [
+        1,
+        2,
+        3,
+      ],
+      "type": "number",
+    },
+  },
+  "properties": Object {
+    "other1": Object {
+      "$ref": "#/definitions/Param_1.Label",
+    },
+  },
+  "required": Array [
+    "other1",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`namespace案例_4 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Param.C.D.E.F.GetBaseDetailResponse": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "id": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "id",
+      ],
+      "type": "object",
+    },
+    "Param_1.A": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "name": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "name",
+      ],
+      "type": "object",
+    },
+    "Param_1.Label": Object {
+      "enum": Array [
+        1,
+        2,
+        3,
+      ],
+      "type": "number",
+    },
+  },
+  "properties": Object {
+    "other1": Object {
+      "$ref": "#/definitions/Param.C.D.E.F.GetBaseDetailResponse",
+    },
+    "other2": Object {
+      "$ref": "#/definitions/Param_1.A",
+    },
+    "other3": Object {
+      "$ref": "#/definitions/Param_1.Label",
+    },
+  },
+  "required": Array [
+    "other1",
+    "other2",
+    "other3",
+  ],
+  "type": "object",
+}
+`;

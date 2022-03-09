@@ -1,0 +1,69 @@
+{
+  "name": "@yunke/yundoc-json-schema",
+  "version": "1.0.17",
+  "main": "./dist/index.js",
+  "typings": "dist/index.d.ts",
+  "repository": "https://git.myscrm.cn/yued/demo",
+  "author": "zane <wangw19@mingyuanyun.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "gts clean && tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build",
+    "test": "umi-test",
+    "test:watch": "umi-test --watch",
+    "test:coverage": "umi-test --coverage",
+    "ci": "yarn tsc --noEmit && yarn lint:all && yarn spell-check:all && yarn test",
+    "lint:all": "yarn eslint --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "spell-check:all": "cspell \"**/*.{txt,ts,tsx,js,json,md}\"",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "prettier": "prettier --write \"**/**.{js,jsx,tsx,ts,less,md,json}\""
+  },
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:all && yarn spell-check:all && yarn test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,json}": [
+      "prettier --write",
+      "cspell"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --cache --fix --format=pretty "
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.14.5",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-angular": "^12.1.4",
+    "@types/jest": "^26.0.24",
+    "@types/lodash": "^4.14.171",
+    "@types/node": "^16.10.3",
+    "@umijs/fabric": "^2.6.2",
+    "@umijs/test": "^3.5.4",
+    "conventional-changelog-cli": "^2.1.1",
+    "cspell": "^5.6.6",
+    "gts": "^3.1.0",
+    "husky": "4.3.8",
+    "lint-staged": "10.5.4",
+    "prettier": "^2.3.2",
+    "prettier-plugin-jsdoc": "^0.3.23",
+    "typescript": "^4.3.4"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.14.7",
+    "@babel/traverse": "^7.14.7",
+    "chalk": "^4.1.1",
+    "deepmerge": "^4.2.2",
+    "doctrine": "^3.0.0",
+    "lodash": "^4.17.21"
+  }
+}
