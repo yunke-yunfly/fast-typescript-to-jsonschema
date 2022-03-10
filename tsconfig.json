@@ -20,7 +20,7 @@
     "noEmitOnError": true,
     "noUnusedParameters": false,
     "strictPropertyInitialization": false,
-    "sourceMap": false,
+    "sourceMap": true,
     "declarationDir": "./dist/"
   },
   "include": ["src/**/*.ts"],
