@@ -1,11 +1,18 @@
 {
-  "name": "typescript-to-jsonschema",
-  "version": "0.0.1-beta.2",
+  "name": "fast-fast-typescript-to-jsonschema",
+  "version": "0.0.1",
+  "description": "fast-typescript-to-jsonschema generates JSON Schema files from your Typescript sources.",
   "main": "./dist/index.js",
   "typings": "dist/index.d.ts",
-  "repository": "https://github.com/yunke-yunfly/typescript-to-jsonschema",
+  "repository": "https://github.com/yunke-yunfly/fast-typescript-to-jsonschema",
   "author": "zane <wangw19@mingyuanyun.com>",
   "license": "MIT",
+  "keywords": [
+    "typescript",
+    "json",
+    "jsonschema",
+    "schema"
+  ],
   "scripts": {
     "build": "gts clean && tsc",
     "dev": "tsc --watch",

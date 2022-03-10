@@ -1,6 +1,6 @@
-# typescript-to-jsonschema
+# fast-typescript-to-jsonschema
 
- ![Test](https://github.com/yunke-yunfly/typescript-to-jsonschema/workflows/Test/badge.svg)
+ ![Test](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/workflows/Test/badge.svg)
 
 生成typescript类型的jsonschema数据
 
@@ -14,7 +14,7 @@
 - 1.安装依赖
 
 ```js
-yarn add typescript-to-jsonschema -D
+yarn add fast-typescript-to-jsonschema -D
 ```
 
 - 2.创建`type.ts`文件，内容如下:
@@ -30,7 +30,7 @@ interface ITest {
 - 3.创建`test.js`文件，内容如下:
 
 ```js
-const { default: genTypeSchema } = require('typescript-to-jsonschema');
+const { default: genTypeSchema } = require('fast-typescript-to-jsonschema');
 const path = require('path');
 
 // 目标文件
@@ -80,7 +80,7 @@ node ./test.js
 ```
 
 - example 案例地址：
-https://github.com/wangweianger/typescript-to-jsonschema/tree/master/example
+https://github.com/wangweianger/fast-typescript-to-jsonschema/tree/master/example
 
 ## 注释
 
@@ -199,6 +199,6 @@ interface Interface_4 {
 
 我们非常欢迎您的贡献，您可以通过以下方式与我们共建。
 
-- 提交[GitHub 问题](https://github.com/yunke-yunfly/typescript-to-jsonschema/issues)以报告错误或提出问题。
-- 提出[拉取请求](https://github.com/yunke-yunfly/typescript-to-jsonschema/pulls)以改进我们的代码。
+- 提交[GitHub 问题](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/issues)以报告错误或提出问题。
+- 提出[拉取请求](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/pulls)以改进我们的代码。
 - [贡献指南](CONTRIBUTING.md)。
