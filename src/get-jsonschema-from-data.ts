@@ -100,6 +100,10 @@ export default class genTypeSchema extends typescriptToFileDatas {
     entry: { keySet: Set<string>; refKeyTime: Record<string, number> },
     file?: string,
   ): null | AnyOption {
+    if (!entry) {
+      entry = { keySet: new Set(), refKeyTime: {} };
+    }
+
     // 深度克隆，防止串改
     typeJson = _.cloneDeep(typeJson);
     const { properties, additionalProperties, extends: extends_, enum: enum_ } = typeJson || {};
