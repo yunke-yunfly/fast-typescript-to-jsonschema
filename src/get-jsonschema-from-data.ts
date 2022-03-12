@@ -125,6 +125,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
       if (!result) return;
       const definitions_ = _.get(result, 'definitions') || {};
       delete result.definitions;
+      delete result.typeParams;
       const definitions = { [$refKey]: result, ...definitions_ };
       typeJson.definitions = { ...typeJson.definitions, ...definitions };
     };
@@ -358,6 +359,13 @@ export default class genTypeSchema extends typescriptToFileDatas {
     const commonArrayHandle = (typeJson: AnyOption) => {
       if (_.get(typeJson, 'items') && _.get(typeJson, 'items.$ref')) {
         commonRefHandle(typeJson.items);
+      } else if (_.get(typeJson, 'items') && _.get(typeJson, 'items.properties')) {
+        const properties = typeJson.items.properties || {};
+        for (const key in properties) {
+          if (properties[key].type === 'array') {
+            commonArrayHandle(properties[key]);
+          }
+        }
       } else {
         const itemArr =
           _.get(typeJson, 'allOf') ||
@@ -600,7 +608,10 @@ export default class genTypeSchema extends typescriptToFileDatas {
 
     // 处理默认值
     if (typeJson.typeParams) {
-      handleGenericDefaultType(typeJson.properties, typeJson.typeParams);
+      const defaultNames = handleGenericDefaultType(typeJson.properties, typeJson.typeParams);
+      if (defaultNames.length) {
+        delete typeJson.typeParams;
+      }
     }
 
     // 对象类型
