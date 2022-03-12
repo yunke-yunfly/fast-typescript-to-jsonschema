@@ -240,7 +240,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
           const item = result.properties[key] || {};
           if (item.$ref) {
             const name = item.$ref.replace('#', '');
-            const ref = fileJson[name];
+            let ref = fileJson[name];
             if (ref && ref.$realRef && ref.$ref && ref.items && ref.items.extraParams) {
               item.$ref = ref.$ref;
               item.$realRef = ref.$realRef;
@@ -534,7 +534,12 @@ export default class genTypeSchema extends typescriptToFileDatas {
         res && Object.assign(item, res);
       } else if (typeof item === 'object') {
         delete item.items;
-        attrCommonHandle(item);
+        let handle = true;
+        const $refKey = item.$ref.replace(/#(\/definitions\/)?/, '');
+        if (typeJson.definitions && Object.keys(typeJson.definitions[$refKey] || {}).length) {
+          handle = false;
+        }
+        attrCommonHandle(item, handle);
       }
     };
 
@@ -567,7 +572,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
       const { definitions, $ref } = typeJson_;
       if ($ref && definitions) {
         const key = $ref.replace(/#\/definitions\//, '');
-        const res = definitions[key];
+        const res = definitions[key] || { definitions: {} };
         delete typeJson_.definitions[key];
         res.definitions = { ...res.definitions, ...typeJson_.definitions };
         typeJson = res;
