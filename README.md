@@ -80,7 +80,7 @@ node ./test.js
 ```
 
 - example 案例地址：
-https://github.com/wangweianger/fast-typescript-to-jsonschema/tree/master/example
+https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/tree/master/example
 
 ## 注释
 
