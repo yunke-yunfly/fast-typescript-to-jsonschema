@@ -19,4 +19,5 @@ jobs:
         run: yarn spell-check:all
       - name: Test
         run: yarn test:coverage
-      -  run: yarn send-coverage
+      - name: Codecov
+        run: yarn send-coverage
