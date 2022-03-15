@@ -202,14 +202,6 @@ Object {
         "value",
       ],
       "type": "object",
-      "typeParams": Object {
-        "0": Object {
-          "default": Object {
-            "type": "string",
-          },
-          "name": "T",
-        },
-      },
     },
   },
   "properties": Object {
@@ -243,21 +235,5 @@ Object {
     "value",
   ],
   "type": "object",
-  "typeParams": Object {
-    "0": Object {
-      "default": Object {
-        "$realRef": "Generic_8",
-        "$ref": "#Generic_8<string>",
-        "items": Object {
-          "extraParams": Array [
-            Object {
-              "type": "string",
-            },
-          ],
-        },
-      },
-      "name": "T",
-    },
-  },
 }
 `;

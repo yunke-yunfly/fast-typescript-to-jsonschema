@@ -49,3 +49,8 @@ test('type类型_数组_1', () => {
 test('type类型_空对象_1', () => {
   expect(getSchema('Type_13')).toMatchSnapshot();
 });
+
+test('type类型_数组_2', () => {
+  expect(getSchema('Type_14')).toMatchSnapshot();
+});
+
