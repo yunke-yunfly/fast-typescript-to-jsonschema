@@ -15,5 +15,8 @@ jobs:
       - run: yarn --frozen-lockfile
       - name: Lint
         run: yarn lint:all
+      - name: SpellCheck
+        run: yarn spell-check:all
       - name: Test
-        run: yarn test
+        run: yarn test:coverage
+        run: yarn send-coverage
