@@ -97,7 +97,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
   genJsonschema(
     fileJson: AnyOption,
     typeJson: AnyOption,
-    entry: { keySet: Set<string>; refKeyTime: Record<string, number> },
+    entry?: { keySet: Set<string>; refKeyTime: Record<string, number> },
     file?: string,
   ): null | AnyOption {
     if (!entry) {
@@ -311,7 +311,6 @@ export default class genTypeSchema extends typescriptToFileDatas {
 
       // 兼容import外部引入与内部引用两种方式
       let $refJson = fileJson[firstKey] || fileJson[$refKey] || {};
-      // 魔法操作，消灭一直循环引用问题
       if ((entry as any).keySet.has($refKey)) {
         (entry as any).refKeyTime[$refKey] = ((entry as any).refKeyTime[$refKey] || 0) + 1;
         return;
@@ -568,6 +567,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
       } else if (item.properties) {
         const res = this.genJsonschema(fileJson, item, entry, file) as AnyOption;
         Object.assign(item, res);
+        item.additionalProperties = item.additionalProperties || false;
         if (item.definitions) {
           typeJson.definitions = { ...typeJson.definitions, ...item.definitions };
           delete item.definitions;

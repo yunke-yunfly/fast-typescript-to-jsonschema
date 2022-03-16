@@ -6,8 +6,10 @@ Object {
   "definitions": Object {},
   "properties": Object {
     "value1": Object {
+      "additionalProperties": false,
       "properties": Object {
         "value2": Object {
+          "additionalProperties": false,
           "properties": Object {
             "value3": Object {
               "type": "string",
