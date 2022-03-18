@@ -69,3 +69,16 @@ test('获取注释_1', () => {
 test('Promise_1', () => {
   expect(getSchema('Other_6')).toMatchSnapshot();
 });
+
+test('测试方法边界情况_genJsonschema', () => {
+  const resultGenJsonschema = genTypeSchema.genJsonschema({}, {});
+  expect(resultGenJsonschema).toMatchObject({});
+});
+
+test('测试方法边界情况_getJsonSchema', () => {
+  const resultGetJsonSchemaTest1 = genTypeSchema.getJsonSchema('test', 'test');
+  expect(resultGetJsonSchemaTest1).toMatchObject({});
+
+  const resultGetJsonSchema = genTypeSchema.getJsonSchema('', 'test')
+  expect(resultGetJsonSchema).toMatchObject({});
+});
