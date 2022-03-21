@@ -66,3 +66,8 @@ type ToolFn_15 = Record<Page, string>;
 // interface ToolFn_18 {
 //   name: Record<Page, PageInfo>
 // }
+
+type Filter = 'a' | 'b';
+type ToolFn_16 = Pick<AAA, Filter>;
+
+type ToolFn_17 = Omit<AAA, Filter>;
