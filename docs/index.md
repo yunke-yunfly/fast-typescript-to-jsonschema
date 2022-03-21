@@ -1,5 +1,5 @@
 > 类型解析结果展示
-
+ 
 - [接口](interface.md)
   - [1.1简单类型](interface.md#11简单类型)
   - [1.2联合类型](interface.md#12联合类型)
@@ -48,6 +48,9 @@
     - [1.1.2Pick](toolFn.md#112pick)
       - [1.1.2.1简单](toolFn.md#1121简单)
       - [1.1.2.2引入](toolFn.md#1122引入)
+    - [1.1.3Record](toolFn.md#112record)
+      - [1.1.3.1简单](toolFn.md#1121简单)
+      - [1.1.3.2引入](toolFn.md#1122引入)
 - [注释](note.md#注释)
   - [1.1单行注释](note.md#11单行注释)
   - [1.2单行注释默认值](note.md#12单行注释默认值)

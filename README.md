@@ -1,6 +1,9 @@
 # fast-typescript-to-jsonschema
+
 [![npm version](https://img.shields.io/npm/v/fast-typescript-to-jsonschema.svg)](https://www.npmjs.com/package/fast-typescript-to-jsonschema) 
 ![Test](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/workflows/Test/badge.svg)
+
+中文 | [English](./README.en-US.md)
 
 生成typescript类型的jsonschema数据
 
@@ -11,13 +14,13 @@
 
 ## 使用
 
-- 1.安装依赖
+1.安装依赖
 
 ```js
 yarn add fast-typescript-to-jsonschema -D
 ```
 
-- 2.创建`type.ts`文件，内容如下:
+2.创建`type.ts`文件，内容如下:
 
 ```ts
 interface ITest {
@@ -27,7 +30,7 @@ interface ITest {
 }
 ```
 
-- 3.创建`test.js`文件，内容如下:
+3.创建`test.js`文件，内容如下:
 
 ```js
 const { default: genTypeSchema } = require('fast-typescript-to-jsonschema');
@@ -49,7 +52,7 @@ const jsonSchema = genTypeSchema.getJsonSchema(file, 'ITest');
 console.log(jsonSchema); 
 ```
 
-- 4.执行脚本
+4.执行脚本
 
 ```js
 node ./test.js
