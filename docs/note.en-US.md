@@ -67,8 +67,7 @@ result:
 ```ts
 interface doc_2 {
   /**
-   * 支持多行注释
-   *
+   * multi-line annotations
    * @type {string}
    */
   name: string;
@@ -82,7 +81,7 @@ result:
   "additionalProperties": false,
   "properties": {
     "name": {
-      "description": "支持多行注释",
+      "description": "multi-line annotations",
       "type": "string",
     },
   },
@@ -113,7 +112,7 @@ result:
   "properties": {
     "age": {
       "default": "25",
-      "description": "年龄",
+      "description": "age",
       "type": "number",
     },
   },
