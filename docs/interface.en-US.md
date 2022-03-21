@@ -15,7 +15,7 @@
 
 ## Interface
 
-`common.ts`文件:
+`common.ts`:
 
 ```ts
 export interface AAA {
@@ -96,7 +96,7 @@ result:
 
 ### 1.2 Union Types
 
-示例:
+Example:
 
 ```ts
 import { AAA, BBB } from './common';
