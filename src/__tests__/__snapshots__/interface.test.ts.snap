@@ -252,6 +252,7 @@ Object {
       ],
     },
     "other6": Object {
+      "additionalProperties": false,
       "properties": Object {
         "some": Object {
           "type": "string",
@@ -267,6 +268,7 @@ Object {
       "type": "object",
     },
     "other8": Object {
+      "additionalProperties": false,
       "properties": Object {
         "a": Object {
           "$ref": "#/definitions/Param.C.D.E.F.GetBaseDetailResponse",

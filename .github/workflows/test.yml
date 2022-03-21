@@ -1,4 +1,4 @@
-name: Test
+name: Lint Test and Codecov
 
 on:
   push:
@@ -15,5 +15,11 @@ jobs:
       - run: yarn --frozen-lockfile
       - name: Lint
         run: yarn lint:all
+      - name: SpellCheck
+        run: yarn spell-check:all
       - name: Test
-        run: yarn test
+        run: yarn test:coverage
+      - name: Codecov
+        env:
+         CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+        run: yarn send-coverage

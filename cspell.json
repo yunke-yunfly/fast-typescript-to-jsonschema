@@ -23,7 +23,8 @@
     "extrares",
     "grpc",
     "Grpc",
-    "plusplus"
+    "plusplus",
+    "codecov"
   ],
   "ignorePaths": [
     "package.json",

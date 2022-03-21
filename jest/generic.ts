@@ -46,3 +46,5 @@ interface Generic_11<T = Generic_8<string>> {
 }
 
 type Generic_12 = Generic_11
+
+type Generic_13 = Generic_11<string>
