@@ -6,8 +6,10 @@ Object {
   "definitions": Object {},
   "properties": Object {
     "value1": Object {
+      "additionalProperties": false,
       "properties": Object {
         "value2": Object {
+          "additionalProperties": false,
           "properties": Object {
             "value3": Object {
               "type": "string",
@@ -202,14 +204,6 @@ Object {
         "value",
       ],
       "type": "object",
-      "typeParams": Object {
-        "0": Object {
-          "default": Object {
-            "type": "string",
-          },
-          "name": "T",
-        },
-      },
     },
   },
   "properties": Object {
@@ -243,21 +237,24 @@ Object {
     "value",
   ],
   "type": "object",
-  "typeParams": Object {
-    "0": Object {
-      "default": Object {
-        "$realRef": "Generic_8",
-        "$ref": "#Generic_8<string>",
-        "items": Object {
-          "extraParams": Array [
-            Object {
-              "type": "string",
-            },
-          ],
-        },
+}
+`;
+
+exports[`Generic默认值_类型_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {},
+  "properties": Object {
+    "value": Object {
+      "items": Object {
+        "type": "string",
       },
-      "name": "T",
+      "type": "array",
     },
   },
+  "required": Array [
+    "value",
+  ],
+  "type": "object",
 }
 `;

@@ -51,6 +51,21 @@ Object {
 }
 `;
 
+exports[`工具函数Omit_4 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "c": Object {
+      "type": "boolean",
+    },
+  },
+  "required": Array [
+    "c",
+  ],
+  "type": "object",
+}
+`;
+
 exports[`工具函数Pick_1 1`] = `
 Object {
   "properties": Object {
@@ -74,6 +89,25 @@ Object {
     },
   },
   "required": Array [
+    "b",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Pick_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+    "b": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "a",
     "b",
   ],
   "type": "object",

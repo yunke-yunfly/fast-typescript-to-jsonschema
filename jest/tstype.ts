@@ -30,3 +30,5 @@ type Type_11 = { name: Label };
 type Type_12 = AAA[];
 
 type Type_13 = {};
+
+type Type_14 = { id: string; name: string; children: AAA[] }[];

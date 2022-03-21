@@ -22,6 +22,10 @@ test('工具函数Omit_3', () => {
   expect(getSchema('ToolFn_3')).toMatchSnapshot();
 });
 
+test('工具函数Omit_4', () => {
+  expect(getSchema('ToolFn_17')).toMatchSnapshot();
+});
+
 // test('工具函数Omit_4', () => {
 //   expect(getSchema('ToolFn_4')).toMatchSnapshot();
 // });
@@ -48,6 +52,10 @@ test('工具函数Pick_1', () => {
 
 test('工具函数Pick_2', () => {
   expect(getSchema('ToolFn_10')).toMatchSnapshot();
+});
+
+test('工具函数Pick_3', () => {
+  expect(getSchema('ToolFn_16')).toMatchSnapshot();
 });
 
 // test('工具函数Pick_3', () => {

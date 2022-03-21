@@ -97,7 +97,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
   genJsonschema(
     fileJson: AnyOption,
     typeJson: AnyOption,
-    entry: { keySet: Set<string>; refKeyTime: Record<string, number> },
+    entry?: { keySet: Set<string>; refKeyTime: Record<string, number> },
     file?: string,
   ): null | AnyOption {
     if (!entry) {
@@ -125,6 +125,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
       if (!result) return;
       const definitions_ = _.get(result, 'definitions') || {};
       delete result.definitions;
+      delete result.typeParams;
       const definitions = { [$refKey]: result, ...definitions_ };
       typeJson.definitions = { ...typeJson.definitions, ...definitions };
     };
@@ -231,7 +232,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
         if (file) {
           this.extendJsonData(file, name, realRef);
         }
-        fileJson[name] = _.cloneDeep(realRef);
+        fileJson[name] = fileJson[name] || _.cloneDeep(realRef);
       }
       // 对象类型
       if (result.properties && Object.keys(result.properties)) {
@@ -240,7 +241,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
           const item = result.properties[key] || {};
           if (item.$ref) {
             const name = item.$ref.replace('#', '');
-            const ref = fileJson[name];
+            let ref = fileJson[name];
             if (ref && ref.$realRef && ref.$ref && ref.items && ref.items.extraParams) {
               item.$ref = ref.$ref;
               item.$realRef = ref.$realRef;
@@ -310,7 +311,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
 
       // 兼容import外部引入与内部引用两种方式
       let $refJson = fileJson[firstKey] || fileJson[$refKey] || {};
-      // 魔法操作，消灭一直循环引用问题
+      $refJson = _.cloneDeep($refJson)
       if ((entry as any).keySet.has($refKey)) {
         (entry as any).refKeyTime[$refKey] = ((entry as any).refKeyTime[$refKey] || 0) + 1;
         return;
@@ -358,6 +359,13 @@ export default class genTypeSchema extends typescriptToFileDatas {
     const commonArrayHandle = (typeJson: AnyOption) => {
       if (_.get(typeJson, 'items') && _.get(typeJson, 'items.$ref')) {
         commonRefHandle(typeJson.items);
+      } else if (_.get(typeJson, 'items') && _.get(typeJson, 'items.properties')) {
+        const properties = typeJson.items.properties || {};
+        for (const key in properties) {
+          if (properties[key].type === 'array') {
+            commonArrayHandle(properties[key]);
+          }
+        }
       } else {
         const itemArr =
           _.get(typeJson, 'allOf') ||
@@ -441,6 +449,9 @@ export default class genTypeSchema extends typescriptToFileDatas {
       if (!extra) return resType;
 
       if (resType) {
+        if (extra && extra.$ref) {
+          extra = _.cloneDeep(attrCommonHandle(extra, false) as AnyOption);
+        }
         const extraKeys = extra.enum || [];
         if (key === 'Omit') {
           const res = deleteJsonSchemaKeys(resType, extraKeys);
@@ -534,7 +545,12 @@ export default class genTypeSchema extends typescriptToFileDatas {
         res && Object.assign(item, res);
       } else if (typeof item === 'object') {
         delete item.items;
-        attrCommonHandle(item);
+        let handle = true;
+        const $refKey = item.$ref.replace(/#(\/definitions\/)?/, '');
+        if (typeJson.definitions && Object.keys(typeJson.definitions[$refKey] || {}).length) {
+          handle = false;
+        }
+        attrCommonHandle(item, handle);
       }
     };
 
@@ -555,6 +571,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
       } else if (item.properties) {
         const res = this.genJsonschema(fileJson, item, entry, file) as AnyOption;
         Object.assign(item, res);
+        item.additionalProperties = item.additionalProperties || false;
         if (item.definitions) {
           typeJson.definitions = { ...typeJson.definitions, ...item.definitions };
           delete item.definitions;
@@ -567,7 +584,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
       const { definitions, $ref } = typeJson_;
       if ($ref && definitions) {
         const key = $ref.replace(/#\/definitions\//, '');
-        const res = definitions[key];
+        const res = definitions[key] || { definitions: {} };
         delete typeJson_.definitions[key];
         res.definitions = { ...res.definitions, ...typeJson_.definitions };
         typeJson = res;
@@ -593,10 +610,6 @@ export default class genTypeSchema extends typescriptToFileDatas {
       typeJson = handleExtends(typeJson);
     }
 
-    // 处理默认值
-    if (typeJson.typeParams) {
-      handleGenericDefaultType(typeJson.properties, typeJson.typeParams);
-    }
 
     // 对象类型
     if (typeJson.properties && Object.keys(typeJson.properties)) {
