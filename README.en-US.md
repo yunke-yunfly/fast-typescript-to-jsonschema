@@ -203,6 +203,6 @@ result:
 
 Contributions are extremely welcomed by our team, you can contribute to this repository by several ways below.
 
-- Submit [GitHub Issue](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/issues) to report errors or ask questions。
-- Create [Pull Request](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/pulls) to improve our code。
-- [Contribution guide](./CONTRIBUTING.en-US.md)。
+- Submit [GitHub Issue](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/issues) to report errors or ask questions
+- Create [Pull Request](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/pulls) to improve our code
+- [Contribution guide](./CONTRIBUTING.en-US.md)
