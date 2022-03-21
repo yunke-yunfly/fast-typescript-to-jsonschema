@@ -15,7 +15,7 @@ export interface BBB {
 }
 
 export enum Label {
-  // 枚举
+  // enum
   LABEL_OPTIONAL = 1,
   LABEL_REQUIRED = 2,
   LABEL_REPEATED = 3,
@@ -37,7 +37,7 @@ export namespace Param {
 
 export namespace Param_1 {
   export enum Label {
-    // 枚举
+    // enum
     LABEL_OPTIONAL = 1,
     LABEL_REQUIRED = 2,
     LABEL_REPEATED = 3,
