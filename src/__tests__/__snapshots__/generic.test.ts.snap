@@ -239,3 +239,22 @@ Object {
   "type": "object",
 }
 `;
+
+exports[`Generic默认值_类型_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {},
+  "properties": Object {
+    "value": Object {
+      "items": Object {
+        "type": "string",
+      },
+      "type": "array",
+    },
+  },
+  "required": Array [
+    "value",
+  ],
+  "type": "object",
+}
+`;

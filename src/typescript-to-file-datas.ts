@@ -54,7 +54,7 @@ export default class typescriptToFileDatas {
 
   extendJsonData(fileName: string, key: string, data: AnyOption) {
     this.jsonData[fileName] = this.jsonData[fileName] || {};
-    this.jsonData[fileName][key] = data;
+    this.jsonData[fileName][key] = this.jsonData[fileName][key] || data;
   }
 
   /**

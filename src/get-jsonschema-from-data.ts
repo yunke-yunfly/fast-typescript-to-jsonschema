@@ -232,7 +232,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
         if (file) {
           this.extendJsonData(file, name, realRef);
         }
-        fileJson[name] = _.cloneDeep(realRef);
+        fileJson[name] = fileJson[name] || _.cloneDeep(realRef);
       }
       // 对象类型
       if (result.properties && Object.keys(result.properties)) {
@@ -311,6 +311,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
 
       // 兼容import外部引入与内部引用两种方式
       let $refJson = fileJson[firstKey] || fileJson[$refKey] || {};
+      $refJson = _.cloneDeep($refJson)
       if ((entry as any).keySet.has($refKey)) {
         (entry as any).refKeyTime[$refKey] = ((entry as any).refKeyTime[$refKey] || 0) + 1;
         return;
@@ -606,13 +607,6 @@ export default class genTypeSchema extends typescriptToFileDatas {
       typeJson = handleExtends(typeJson);
     }
 
-    // 处理默认值
-    if (typeJson.typeParams) {
-      const defaultNames = handleGenericDefaultType(typeJson.properties, typeJson.typeParams);
-      if (defaultNames.length) {
-        delete typeJson.typeParams;
-      }
-    }
 
     // 对象类型
     if (typeJson.properties && Object.keys(typeJson.properties)) {

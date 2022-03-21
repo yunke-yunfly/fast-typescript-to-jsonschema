@@ -30,6 +30,10 @@ test('Generic默认值_类型_2', () => {
   expect(getSchema('Generic_12')).toMatchSnapshot();
 });
 
+test('Generic默认值_类型_3', () => {
+  expect(getSchema('Generic_13')).toMatchSnapshot();
+});
+
 test('Generic多层对象_类型_1', () => {
   expect(getSchema('Generic_9')).toMatchSnapshot();
 });
