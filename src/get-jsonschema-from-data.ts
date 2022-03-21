@@ -449,6 +449,9 @@ export default class genTypeSchema extends typescriptToFileDatas {
       if (!extra) return resType;
 
       if (resType) {
+        if (extra && extra.$ref) {
+          extra = _.cloneDeep(attrCommonHandle(extra, false) as AnyOption);
+        }
         const extraKeys = extra.enum || [];
         if (key === 'Omit') {
           const res = deleteJsonSchemaKeys(resType, extraKeys);
