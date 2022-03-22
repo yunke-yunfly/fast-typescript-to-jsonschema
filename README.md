@@ -4,6 +4,8 @@
 ![Test](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/workflows/Test/badge.svg)
 [![codecov](https://codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema/branch/master/graph/badge.svg)](https://app.codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema)
 
+中文 | [English](./README.en-US.md)
+
 生成typescript类型的jsonschema数据
 
 ## 特性
@@ -13,13 +15,13 @@
 
 ## 使用
 
-- 1.安装依赖
+1.安装依赖
 
 ```js
 yarn add fast-typescript-to-jsonschema -D
 ```
 
-- 2.创建`type.ts`文件，内容如下:
+2.创建`type.ts`文件，内容如下:
 
 ```ts
 interface ITest {
@@ -29,7 +31,7 @@ interface ITest {
 }
 ```
 
-- 3.创建`test.js`文件，内容如下:
+3.创建`test.js`文件，内容如下:
 
 ```js
 const { default: genTypeSchema } = require('fast-typescript-to-jsonschema');
@@ -51,7 +53,7 @@ const jsonSchema = genTypeSchema.getJsonSchema(file, 'ITest');
 console.log(jsonSchema); 
 ```
 
-- 4.执行脚本
+4.执行脚本
 
 ```js
 node ./test.js
