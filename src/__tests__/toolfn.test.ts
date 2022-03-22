@@ -89,3 +89,16 @@ test('工具函数Record_3', () => {
 // test('工具函数Record_6', () => {
 //   expect(getSchema('ToolFn_18')).toMatchSnapshot();
 // });
+
+
+test('工具函数Partial_1', () => {
+  expect(getSchema('ToolFn_18')).toMatchSnapshot();
+});
+
+test('工具函数Partial_2', () => {
+  expect(getSchema('ToolFn_19')).toMatchSnapshot();
+});
+
+test('工具函数Partial_3', () => {
+  expect(getSchema('ToolFn_20')).toMatchSnapshot();
+});

@@ -4,6 +4,12 @@ interface AAA {
   c: boolean;
 }
 
+interface BBB {
+  a: number;
+  b?: string;
+  c: AAA,
+}
+
 type ToolFn_1 = Omit<{ a: number; b: string; c: boolean }, 'b'>;
 
 type ToolFn_2 = Omit<{ a: number; b: string; c: boolean }, 'b' | 'c'>;
@@ -71,3 +77,10 @@ type Filter = 'a' | 'b';
 type ToolFn_16 = Pick<AAA, Filter>;
 
 type ToolFn_17 = Omit<AAA, Filter>;
+
+
+type ToolFn_18 = Partial<AAA>;
+
+type ToolFn_19 = Partial<BBB>;
+
+type ToolFn_20 = Partial<{ a: string, b: BBB }>;
