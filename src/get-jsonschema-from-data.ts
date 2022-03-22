@@ -314,7 +314,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
       $refJson = _.cloneDeep($refJson)
       if ((entry as any).keySet.has($refKey)) {
         (entry as any).refKeyTime[$refKey] = ((entry as any).refKeyTime[$refKey] || 0) + 1;
-        return;
+        return $refJson;
       }
 
       (entry as any).keySet.add($refKey);
@@ -472,9 +472,18 @@ export default class genTypeSchema extends typescriptToFileDatas {
         resType = _.cloneDeep(this.genJsonschema(fileJson, type, entry, file) as AnyOption);
       } else if (type.$ref) {
         resType = _.cloneDeep(attrCommonHandle(type, false) as AnyOption);
+      } else if (type.anyOf) {
+        resType = { anyOf: [] };
+        resType.anyOf = type.anyOf.map((item: AnyOption) => {
+          return PartialRequiredHandle(key, item);
+        })
       }
 
-      if (resType) {
+      if (resType && Object.keys(resType).length) {
+        if (resType.anyOf) {
+          return resType;
+        }
+
         if (key === 'Partial') {
           delete resType.required;
           return resType;

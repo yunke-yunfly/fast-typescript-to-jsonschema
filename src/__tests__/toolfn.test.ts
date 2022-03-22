@@ -103,6 +103,10 @@ test('工具函数Partial_3', () => {
   expect(getSchema('ToolFn_20')).toMatchSnapshot();
 });
 
+test('工具函数Partial_联合类型_1', () => {
+  expect(getSchema('ToolFn_24')).toMatchSnapshot();
+});
+
 test('工具函数Required_1', () => {
   expect(getSchema('ToolFn_21')).toMatchSnapshot();
 });
@@ -114,3 +118,7 @@ test('工具函数Required_2', () => {
 test('工具函数Required_3', () => {
   expect(getSchema('ToolFn_23')).toMatchSnapshot();
 });
+
+test('工具函数Required_联合类型_1', () => {
+  expect(getSchema('ToolFn_25')).toMatchSnapshot();
+})

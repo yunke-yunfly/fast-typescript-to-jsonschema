@@ -103,3 +103,7 @@ type ToolFn_21 = Required<CCC>;
 type ToolFn_22 = Required<DDD>;
 
 type ToolFn_23 = Required<{ a?: string, b?: DDD }>;
+
+type ToolFn_24 = Partial<BBB | AAA>;
+
+type ToolFn_25 = Required<DDD | CCC>;
