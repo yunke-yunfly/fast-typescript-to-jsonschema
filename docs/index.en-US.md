@@ -1,4 +1,4 @@
-> some examples of type parsement
+> some examples of type resolution
 
 - [Interface](interface.en-US.md)
   - [1.1 Basic Types](interface.en-US.md#11-basic-types)

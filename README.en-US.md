@@ -10,7 +10,7 @@ a tool generate json schema from typescript.
 ## Feature
 
 - compile Typescript to get all type information
-- convert properties, extendings, annotations, and initial values to jsonschema
+- convert properties, extends, annotations, and initial values to jsonschema
 
 ## Usage
 

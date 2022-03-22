@@ -14,9 +14,9 @@
 ## Unit Test
 
 - All new features need to have a test case
-- Test cases should be paased if you modified the old code
+- Test cases should be passed if you modified the old code
 
-## Commiting
+## Commit
 
 - All commits need to follow the [angular commit-message-format](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
 - Linting before committing
