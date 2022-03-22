@@ -34,7 +34,7 @@ export default class typescriptToFileDatas {
     this.jsonData = {};
     this.cacheFiles = [];
     this.filterFiles = [];
-    this.filterRefKeywords = ['Omit', 'Pick', 'Record', 'Partial', 'Array', 'Promise'];
+    this.filterRefKeywords = ['Omit', 'Pick', 'Record', 'Partial', 'Required', 'Array', 'Promise'];
   }
 
   /**

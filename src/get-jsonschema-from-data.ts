@@ -20,7 +20,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
 
   constructor() {
     super();
-    this.tsTollFn = ['Omit', 'Pick', 'Record', 'Partial'];
+    this.tsTollFn = ['Omit', 'Pick', 'Record', 'Partial', 'Required'];
   }
 
   /**
@@ -479,6 +479,13 @@ export default class genTypeSchema extends typescriptToFileDatas {
           delete resType.required;
           return resType;
         }
+        if (key === 'Required') {
+          delete resType.required;
+          if (resType.properties) {
+            resType.required = Object.keys(resType.properties)
+          }
+          return resType;
+        }
       }
     };
 
@@ -550,6 +557,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
         case 'Record':
           return RecordHandle(key, type, extra);
         case 'Partial':
+        case 'Required':
           return PartialRequiredHandle(key, $ref ? { $ref } : items);
         default:
           item.items = items;

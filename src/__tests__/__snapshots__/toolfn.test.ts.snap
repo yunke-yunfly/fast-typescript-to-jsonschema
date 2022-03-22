@@ -289,3 +289,120 @@ Object {
   "type": "object",
 }
 `;
+
+exports[`工具函数Required_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+    "b": Object {
+      "type": "string",
+    },
+    "c": Object {
+      "type": "boolean",
+    },
+  },
+  "required": Array [
+    "a",
+    "b",
+    "c",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Required_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "CCC": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+    "b": Object {
+      "type": "string",
+    },
+    "c": Object {
+      "$ref": "#/definitions/CCC",
+    },
+  },
+  "required": Array [
+    "a",
+    "b",
+    "c",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Required_3 1`] = `
+Object {
+  "definitions": Object {
+    "CCC": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+    "DDD": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "$ref": "#/definitions/CCC",
+        },
+      },
+      "required": Array [
+        "a",
+        "c",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "a": Object {
+      "type": "string",
+    },
+    "b": Object {
+      "$ref": "#/definitions/DDD",
+    },
+  },
+  "required": Array [
+    "a",
+    "b",
+  ],
+  "type": "object",
+}
+`;

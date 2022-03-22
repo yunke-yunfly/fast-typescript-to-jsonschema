@@ -3,12 +3,25 @@ interface AAA {
   b: string;
   c: boolean;
 }
-
 interface BBB {
   a: number;
   b?: string;
   c: AAA,
 }
+
+interface CCC {
+  a?: number;
+  b?: string;
+  c?: boolean;
+}
+
+interface DDD {
+  a: number;
+  b?: string;
+  c: CCC,
+}
+
+
 
 type ToolFn_1 = Omit<{ a: number; b: string; c: boolean }, 'b'>;
 
@@ -84,3 +97,9 @@ type ToolFn_18 = Partial<AAA>;
 type ToolFn_19 = Partial<BBB>;
 
 type ToolFn_20 = Partial<{ a: string, b: BBB }>;
+
+type ToolFn_21 = Required<CCC>;
+
+type ToolFn_22 = Required<DDD>;
+
+type ToolFn_23 = Required<{ a?: string, b?: DDD }>;
