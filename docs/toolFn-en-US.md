@@ -1,15 +1,24 @@
-- [Utility Types](toolFn.md#utility-types)
-  - [1.1 Utility for Objects](toolFn.md#11-utility-for-objects)
-    - [1.1.1 Omit](toolFn.md#111-omit)
-      - [1.1.1.1 Basic Omit](toolFn.md#1111-basic-omit)
-      - [1.1.1.2 Union Omit](toolFn.md#1112-union-omit)
-      - [1.1.1.3 Import Omit](toolFn.md#1113-import-omit)
-    - [1.1.2 Pick](toolFn.md#112-pick)
-      - [1.1.2.1 Basic Pick](toolFn.md#1121-basic-pick)
-      - [1.1.2.2 Import Pick](toolFn.md#1122-import-pick)
-    - [1.1.3 Record](toolFn.md#112-record)
-      - [1.1.2.1 Basic Record](toolFn.md#1121-basic-record)
-      - [1.1.2.2 Import Record](toolFn.md#1122-import-record)
+- [Utility Types](#utility-types)
+  - [1.1 Utility for Objects](#11-utility-for-objects)
+    - [1.1.1 Omit](#111-omit)
+      - [1.1.1.1 Basic Omit](#1111-basic-omit)
+      - [1.1.1.2 Union Omit](#1112-union-omit)
+      - [1.1.1.3 Import Omit](#1113-import-omit)
+    - [1.1.2 Pick](#112-pick)
+      - [1.1.2.1 Basic Pick](#1121-basic-pick)
+      - [1.1.2.2 Import Pick](#1122-import-pick)
+      - [1.1.2.3 Union Pick](#1123-union-pick)
+    - [1.1.3 Record](#113-record)
+      - [1.1.3.1 Basic Record](#1131-basic-record)
+      - [1.1.3.2 Import Record](#1132-import-record)
+    - [1.1.4 Partial](#114-partial)
+      - [1.1.4.1 Basic Partial](#1141-basic-partial)
+      - [1.1.4.2 Import Partial](#1142-import-partial)
+      - [1.1.4.3 Union Partial](#1143-union-partial)
+    - [1.1.5 Required](#115-required)
+      - [1.1.5.1 Basic Required](#1151-basic-required)
+      - [1.1.5.2 Import Required](#1152-import-required)
+      - [1.1.5.3 Union Required](#1153-union-required)
 
 ## Utility Types
 
@@ -149,6 +158,35 @@ result:
 }
 ```
 
+##### 1.1.2.3 Union Pick
+
+```ts
+type Filter = 'a' | 'b';
+type ToolFn_16 = Pick<AAA, Filter>;
+```
+
+结果:
+
+```json
+{
+  "additionalProperties": false,
+  "properties": {
+    "a": {
+      "type": "number",
+    },
+    "b": {
+      "type": "string",
+    },
+  },
+  "required": [
+    "a",
+    "b",
+  ],
+  "type": "object",
+}
+```
+
+
 #### 1.1.3 Record
 
 ##### 1.1.3.1 Basic Record
@@ -209,5 +247,334 @@ result:
     "contact",
   ],
   "type": "object",
+}
+```
+
+#### 1.1.4 Partial
+
+##### 1.1.4.1 Basic Partial
+
+```ts
+type ToolFn_20 = Partial<{ a: string, b: number }>;
+```
+
+结果:
+
+```json
+{
+  "properties": {
+    "a": {
+      "type": "string",
+    },
+    "b": {
+      "$ref": "number",
+    },
+  },
+  "type": "object",
+}
+```
+
+##### 1.1.4.2 Import Partial
+
+```ts
+interface AAA {
+  a: number;
+  b: string;
+  c: boolean;
+}
+interface BBB {
+  a: number;
+  b?: string;
+  c: AAA,
+}
+type ToolFn_19 = Partial<BBB>;
+```
+
+结果:
+
+```json
+{
+  "additionalProperties": false,
+  "definitions": {
+    "AAA": {
+      "additionalProperties": false,
+      "properties": {
+        "a": {
+          "type": "number",
+        },
+        "b": {
+          "type": "string",
+        },
+        "c": {
+          "type": "boolean",
+        },
+      },
+      "required": [
+        "a",
+        "b",
+        "c",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": {
+    "a": {
+      "type": "number",
+    },
+    "b": {
+      "type": "string",
+    },
+    "c": {
+      "$ref": "#/definitions/AAA",
+    },
+  },
+  "type": "object",
+}
+```
+
+##### 1.1.4.3 Union Partial
+
+```ts
+interface AAA {
+  a: number;
+  b: string;
+  c: boolean;
+}
+interface BBB {
+  a: number;
+  b?: string;
+  c: AAA,
+}
+type ToolFn_24 = Partial<BBB | AAA>;
+```
+
+结果:
+
+```json
+{
+  "anyOf": [
+   {
+      "additionalProperties": false,
+      "definitions": {
+        "AAA": {
+          "additionalProperties": false,
+          "properties": {
+            "a": {
+              "type": "number",
+            },
+            "b": {
+              "type": "string",
+            },
+            "c": {
+              "type": "boolean",
+            },
+          },
+          "required": [
+            "a",
+            "b",
+            "c",
+          ],
+          "type": "object",
+        },
+      },
+      "properties": {
+        "a": {
+          "type": "number",
+        },
+        "b": {
+          "type": "string",
+        },
+        "c": {
+          "$ref": "#/definitions/AAA",
+        },
+      },
+      "type": "object",
+    },
+   {
+      "additionalProperties": false,
+      "properties": {
+        "a": {
+          "type": "number",
+        },
+        "b": {
+          "type": "string",
+        },
+        "c": {
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+  ],
+}
+```
+
+#### 1.1.5 Required
+
+##### 1.1.5.1 Basic Required
+
+```ts
+type ToolFn_23 = Required<{ a?: string, b?: number }>;
+```
+
+结果:
+
+```json
+{
+  "properties": {
+    "a": {
+      "type": "string",
+    },
+    "b": {
+      "$ref": "number",
+    },
+  },
+  "required": [
+    "a",
+    "b",
+  ],
+  "type": "object",
+}
+```
+
+##### 1.1.5.2 Import Required
+
+```ts
+interface CCC {
+  a?: number;
+  b?: string;
+  c?: boolean;
+}
+
+interface DDD {
+  a: number;
+  b?: string;
+  c: CCC,
+}
+type ToolFn_22 = Required<DDD>;
+```
+
+结果:
+
+```json
+{
+  "additionalProperties": false,
+  "definitions": {
+    "CCC": {
+      "additionalProperties": false,
+      "properties": {
+        "a": {
+          "type": "number",
+        },
+        "b": {
+          "type": "string",
+        },
+        "c": {
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "properties": {
+    "a": {
+      "type": "number",
+    },
+    "b": {
+      "type": "string",
+    },
+    "c": {
+      "$ref": "#/definitions/CCC",
+    },
+  },
+  "required": [
+    "a",
+    "b",
+    "c",
+  ],
+  "type": "object",
+}
+```
+
+##### 1.1.5.3 Union Required
+
+```ts
+interface CCC {
+  a?: number;
+  b?: string;
+  c?: boolean;
+}
+
+interface DDD {
+  a: number;
+  b?: string;
+  c: CCC,
+}
+type ToolFn_25 = Required<DDD | CCC>;
+```
+
+结果:
+
+```json
+{
+  "anyOf": [
+   {
+      "additionalProperties": false,
+      "definitions": {
+        "CCC": {
+          "additionalProperties": false,
+          "properties": {
+            "a": {
+              "type": "number",
+            },
+            "b": {
+              "type": "string",
+            },
+            "c": {
+              "type": "boolean",
+            },
+          },
+          "type": "object",
+        },
+      },
+      "properties": {
+        "a": {
+          "type": "number",
+        },
+        "b": {
+          "type": "string",
+        },
+        "c": {
+          "$ref": "#/definitions/CCC",
+        },
+      },
+      "required": [
+        "a",
+        "b",
+        "c",
+      ],
+      "type": "object",
+    },
+   {
+      "additionalProperties": false,
+      "properties": {
+        "a": {
+          "type": "number",
+        },
+        "b": {
+          "type": "string",
+        },
+        "c": {
+          "type": "boolean",
+        },
+      },
+      "required": [
+        "a",
+        "b",
+        "c",
+      ],
+      "type": "object",
+    },
+  ],
 }
 ```

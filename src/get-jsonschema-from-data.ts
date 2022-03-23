@@ -20,7 +20,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
 
   constructor() {
     super();
-    this.tsTollFn = ['Omit', 'Pick', 'Record'];
+    this.tsTollFn = ['Omit', 'Pick', 'Record', 'Partial', 'Required'];
   }
 
   /**
@@ -314,7 +314,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
       $refJson = _.cloneDeep($refJson)
       if ((entry as any).keySet.has($refKey)) {
         (entry as any).refKeyTime[$refKey] = ((entry as any).refKeyTime[$refKey] || 0) + 1;
-        return;
+        return $refJson;
       }
 
       (entry as any).keySet.add($refKey);
@@ -466,6 +466,38 @@ export default class genTypeSchema extends typescriptToFileDatas {
       }
     };
 
+    const PartialRequiredHandle = (key: string, type: AnyOption) => {
+      let resType: any;
+      if (type.properties) {
+        resType = _.cloneDeep(this.genJsonschema(fileJson, type, entry, file) as AnyOption);
+      } else if (type.$ref) {
+        resType = _.cloneDeep(attrCommonHandle(type, false) as AnyOption);
+      } else if (type.anyOf) {
+        resType = { anyOf: [] };
+        resType.anyOf = type.anyOf.map((item: AnyOption) => {
+          return PartialRequiredHandle(key, item);
+        })
+      }
+
+      if (resType && Object.keys(resType).length) {
+        if (resType.anyOf) {
+          return resType;
+        }
+
+        if (key === 'Partial') {
+          delete resType.required;
+          return resType;
+        }
+        if (key === 'Required') {
+          delete resType.required;
+          if (resType.properties) {
+            resType.required = Object.keys(resType.properties)
+          }
+          return resType;
+        }
+      }
+    };
+
     const RecordHandle = (key: string, type: AnyOption, extra: AnyOption) => {
       let resType: any;
       if (type.$ref) {
@@ -521,17 +553,23 @@ export default class genTypeSchema extends typescriptToFileDatas {
       return commonTsToolResHandle(jsonSchema, $refKey);
     };
 
+    // 处理工具函数 Omit,Pick,Record,Partial,Required
     const handleTsToolFunction = (item: AnyOption) => {
-      // 处理工具函数 Omit,Pick等
-      const { type = {}, extra } = _.get(item, 'items') || {};
-      delete item.items;
       const key = _.get(item, '$ref').replace(/#/, '');
-
-      if (key === 'Omit' || key === 'Pick') {
-        return OmitPickHandle(key, type, extra);
-      }
-      if (key === 'Record') {
-        return RecordHandle(key, type, extra);
+      const items = _.get(item, 'items') || {};
+      delete item.items;
+      const { type = {}, extra, $ref } = items;
+      switch (key) {
+        case 'Omit':
+        case 'Pick':
+          return OmitPickHandle(key, type, extra);
+        case 'Record':
+          return RecordHandle(key, type, extra);
+        case 'Partial':
+        case 'Required':
+          return PartialRequiredHandle(key, $ref ? { $ref } : items);
+        default:
+          item.items = items;
       }
     };
 

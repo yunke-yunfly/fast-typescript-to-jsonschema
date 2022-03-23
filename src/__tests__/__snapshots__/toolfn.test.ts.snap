@@ -66,6 +66,178 @@ Object {
 }
 `;
 
+exports[`工具函数Partial_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+    "b": Object {
+      "type": "string",
+    },
+    "c": Object {
+      "type": "boolean",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`工具函数Partial_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "required": Array [
+        "a",
+        "b",
+        "c",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+    "b": Object {
+      "type": "string",
+    },
+    "c": Object {
+      "$ref": "#/definitions/AAA",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`工具函数Partial_3 1`] = `
+Object {
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "required": Array [
+        "a",
+        "b",
+        "c",
+      ],
+      "type": "object",
+    },
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "$ref": "#/definitions/AAA",
+        },
+      },
+      "required": Array [
+        "a",
+        "c",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "a": Object {
+      "type": "string",
+    },
+    "b": Object {
+      "$ref": "#/definitions/BBB",
+    },
+  },
+  "type": "object",
+}
+`;
+
+exports[`工具函数Partial_联合类型_1 1`] = `
+Object {
+  "anyOf": Array [
+    Object {
+      "additionalProperties": false,
+      "definitions": Object {
+        "AAA": Object {
+          "additionalProperties": false,
+          "properties": Object {
+            "a": Object {
+              "type": "number",
+            },
+            "b": Object {
+              "type": "string",
+            },
+            "c": Object {
+              "type": "boolean",
+            },
+          },
+          "required": Array [
+            "a",
+            "b",
+            "c",
+          ],
+          "type": "object",
+        },
+      },
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "$ref": "#/definitions/AAA",
+        },
+      },
+      "type": "object",
+    },
+    Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+  ],
+}
+`;
+
 exports[`工具函数Pick_1 1`] = `
 Object {
   "properties": Object {
@@ -174,5 +346,186 @@ Object {
     "contact",
   ],
   "type": "object",
+}
+`;
+
+exports[`工具函数Required_1 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+    "b": Object {
+      "type": "string",
+    },
+    "c": Object {
+      "type": "boolean",
+    },
+  },
+  "required": Array [
+    "a",
+    "b",
+    "c",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Required_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "CCC": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "a": Object {
+      "type": "number",
+    },
+    "b": Object {
+      "type": "string",
+    },
+    "c": Object {
+      "$ref": "#/definitions/CCC",
+    },
+  },
+  "required": Array [
+    "a",
+    "b",
+    "c",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Required_3 1`] = `
+Object {
+  "definitions": Object {
+    "CCC": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+    "DDD": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "$ref": "#/definitions/CCC",
+        },
+      },
+      "required": Array [
+        "a",
+        "c",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "a": Object {
+      "type": "string",
+    },
+    "b": Object {
+      "$ref": "#/definitions/DDD",
+    },
+  },
+  "required": Array [
+    "a",
+    "b",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Required_联合类型_1 1`] = `
+Object {
+  "anyOf": Array [
+    Object {
+      "additionalProperties": false,
+      "definitions": Object {
+        "CCC": Object {
+          "additionalProperties": false,
+          "properties": Object {
+            "a": Object {
+              "type": "number",
+            },
+            "b": Object {
+              "type": "string",
+            },
+            "c": Object {
+              "type": "boolean",
+            },
+          },
+          "type": "object",
+        },
+      },
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "$ref": "#/definitions/CCC",
+        },
+      },
+      "required": Array [
+        "a",
+        "b",
+        "c",
+      ],
+      "type": "object",
+    },
+    Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "required": Array [
+        "a",
+        "b",
+        "c",
+      ],
+      "type": "object",
+    },
+  ],
 }
 `;
