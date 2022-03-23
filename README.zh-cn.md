@@ -4,7 +4,7 @@
 ![Test](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/workflows/Test/badge.svg)
 [![codecov](https://codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema/branch/master/graph/badge.svg)](https://app.codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema)
 
-中文 | [English](./README.en-US.md)
+简体中文 | [English](./README.md)
 
 生成typescript类型的jsonschema数据
 
