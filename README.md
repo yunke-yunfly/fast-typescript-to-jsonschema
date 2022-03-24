@@ -4,7 +4,7 @@
 ![Test](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/workflows/Test/badge.svg)
 [![codecov](https://codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema/branch/master/graph/badge.svg)](https://app.codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema)
 
-English | [简体中文](./README.md)
+English | [简体中文](./README.zh-cn.md)
 
 a tool generate json schema from typescript.
 
