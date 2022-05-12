@@ -178,7 +178,6 @@ Object {
 
 exports[`type类型_10 1`] = `
 Object {
-  "definitions": Object {},
   "enum": Array [
     1,
     2,

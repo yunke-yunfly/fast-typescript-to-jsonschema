@@ -326,7 +326,8 @@ export default class genTypeSchema extends typescriptToFileDatas {
 
       item.$ref = `#/definitions/${$refKey}`;
 
-      if (!$refJson.$ref) {
+      // fileJson[$refJson.$ref.replace(/#(\/definitions\/)?/, '')] 表示在本文件就能找到
+      if (!$refJson.$ref || fileJson[$refJson.$ref.replace(/#(\/definitions\/)?/, '')]) {
         // 有继承
         if ($refJson.extends) {
           $refJson = handleExtends($refJson);
@@ -625,6 +626,10 @@ export default class genTypeSchema extends typescriptToFileDatas {
         const res = definitions[key] || { definitions: {} };
         delete typeJson_.definitions[key];
         res.definitions = { ...res.definitions, ...typeJson_.definitions };
+        // 枚举类型且 definitions 为空，需删掉 definitions
+        if (res.enum && !Object.keys(res.definitions).length) {
+          delete res.definitions;
+        }
         typeJson = res;
       }
     };
