@@ -4,24 +4,24 @@
 ![Test](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/workflows/Test/badge.svg)
 [![codecov](https://codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema/branch/master/graph/badge.svg)](https://app.codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema)
 
-中文 | [English](./README.en-US.md)
+English | [简体中文](./README.zh-cn.md)
 
-生成typescript类型的jsonschema数据
+a tool generate json schema from typescript.
 
-## 特性
+## Feature
 
-- 编译Typescript文件以获取完整的类型信息
-- 将所需的属性、继承、注释、属性初始值转换为jsonschema
+- compile Typescript to get all type information
+- convert properties, extends, annotations, and initial values to jsonschema
 
-## 使用
+## Usage
 
-1.安装依赖
+1. install
 
-```js
+```bash
 yarn add fast-typescript-to-jsonschema -D
 ```
 
-2.创建`type.ts`文件，内容如下:
+2. create `type.ts`
 
 ```ts
 interface ITest {
@@ -31,35 +31,35 @@ interface ITest {
 }
 ```
 
-3.创建`test.js`文件，内容如下:
+3. create `test.js`
 
 ```js
 const { default: genTypeSchema } = require('fast-typescript-to-jsonschema');
 const path = require('path');
 
-// 目标文件
+// target file
 const file = path.resolve(__dirname, './type.ts');
 
-// 生成数据
+// generate data
 genTypeSchema.genJsonDataFormFile(file);
 
-// 获得当前文件对应的所有jsonschema数据
+// get all jsonschema data of current file
 const json = genTypeSchema.genJsonData();
 
-// 获得具体的某个type的jsonschema数据
+// get jsonschema of specific type
 const jsonSchema = genTypeSchema.getJsonSchema(file, 'ITest');
 
-// 返回结果
+// result
 console.log(jsonSchema); 
 ```
 
-4.执行脚本
+4. execute script
 
 ```js
 node ./test.js
 ```
 
-`jsonSchema`返回结果如下:
+`jsonSchema` result:
 
 ```json
 {
@@ -83,12 +83,11 @@ node ./test.js
 }
 ```
 
-- example 案例地址：
-https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/tree/master/example
+see more examples at [example](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/tree/master/example).
 
-## 注释
+## Comments
 
-示例1
+Example1
 
 ```ts
 interface Interface_1 {
@@ -96,7 +95,7 @@ interface Interface_1 {
 }
 ```
 
-结果:
+result:
 
 ```json
 {
@@ -113,7 +112,7 @@ interface Interface_1 {
 }
 ```
 
-示例2
+Example2
 
 ```ts
 interface Interface_4 {
@@ -121,7 +120,7 @@ interface Interface_4 {
 }
 ```
 
-结果:
+result:
 
 ```json
 {
@@ -141,68 +140,70 @@ interface Interface_4 {
 }
 ```
 
+> Read more supported types [here](docs/index.en-US.md)
 
-> 更多支持的类型解析[请看](docs/index.md),目录如下:
+- [Interface](docs/interface.en-US.md)
+  - [1.1 Basic Types](docs/interface.en-US.md#11-basic-types)
+  - [1.2 Union Types](docs/interface.en-US.md#12-union-types)
+  - [1.3 Intersection Types](docs/interface.en-US.md#13-intersection-types)
+  - [1.4 Array Types](docs/interface.en-US.md#14-array-types)
+    - [1.4.1 Basic Array Types](docs/interface.en-US.md#141-basic-array-types)
+    - [1.4.2 Complex Array Types](docs/interface.en-US.md#142-complex-array-types)
+  - [1.5 Nesting](docs/interface.en-US.md#15-nesting)
+    - [1.5.1 Nested Basic Types](docs/interface.en-US.md#151-nested-basic-types)
+    - [1.5.2 Nested Union Types](docs/interface.en-US.md#152-nested-union-types)
+    - [1.5.3 Nested Intersection Types](docs/interface.en-US.md#153-nested-intersection-types)
+    - [1.5.4 Nested Intersection Array Types](docs/interface.en-US.md#154-nested-intersection-array-types)
+    - [1.5.5 Nested loop](docs/interface.en-US.md#155-nested-loop)
+  - [1.6 Index Types](docs/interface.en-US.md#16-index-types)
+- [Modules](docs/module.en-US.md#modules)
+  - [1.1 Basic Modules](docs/module.en-US.md#11-basic-modules)
+  - [1.2 Named Export Modules](docs/module.en-US.md#12-named-export-modules)
+- [Extending Types](docs/extends.en-US.md#extending-types)
+  - [1.1 Basic Extending Types](docs/extends.en-US.md#11-basic-extending-types)
+  - [1.2 Multiple Extending Types ](docs/extends.en-US.md#12-multiple-extending-types)
+- [Enums](docs/enum.en-US.md#enums)
+  - [1.1 Numeric Enums](docs/enum.en-US.md#11-numeric-enums)
+  - [1.2 String Enums](docs/enum.en-US.md#12-string-enums)
+  - [1.3 Computed Enums](docs/enum.en-US.md#13-computed-enums)
+  - [1.4 Complex Enums](docs/enum.en-US.md#14-complex-enums)
+    - [1.4.1 Basic Interface to Enums](docs/enum.en-US.md#141-basic-interface-to-enums)
+    - [1.4.2 Complex Interface to Enums](docs/enum.en-US.md#142-complex-interface-to-enums)
+- [Generics](docs/generic.en-US.md#generics)
+  - [1.1 Basic Generics](docs/generic.en-US.md#11-basic-generics)
+  - [1.2 Complex Generics](docs/generic.en-US.md#12-complex-generics)
+- [Namespaces](docs/namespace.en-US.md#namespaces)
+  - [1.1 Basic Namespaces](docs/namespace.en-US.md#11-basic-namespaces)
+  - [1.2 Complex Namespaces](docs/namespace.en-US.md#12-complex-namespaces)
+- [Type](docs/type.en-US.md#type)
+  - [1.1 Basic Types](docs/type.en-US.md#11-basic-types)
+  - [1.2 Complex Types](docs/type.en-US.md#12-complex-types)
+    - [1.2.1 Union Types](docs/type.en-US.md#121-union-types)
+    - [1.2.2 Union Array Types](docs/type.en-US.md#122-union-array-types)
+    - [1.2.2 Import Enums](docs/type.en-US.md#122-import-enums)
+- [Utility Types](docs/toolFn.en-US.md#utility-types)
+  - [1.1 Utility for Objects](docs/toolFn.en-US.md#11-utility-for-objects)
+    - [1.1.1 Omit](docs/toolFn.en-US.md#111-omit)
+      - [1.1.1.1 Basic Omit](docs/toolFn.en-US.md#1111-basic-omit)
+      - [1.1.1.2 Union Omit](docs/toolFn.en-US.md#1112-union-omit)
+      - [1.1.1.3 Import Omit](docs/toolFn.en-US.md#1113-import-omit)
+    - [1.1.2 Pick](docs/toolFn.en-US.md#112-pick)
+      - [1.1.2.1 Basic Pick](docs/toolFn.en-US.md#1121-basic-pick)
+      - [1.1.2.2 Import Pick](docs/toolFn.en-US.md#1122-import-pick)
+    - [1.1.3 Record](docs/toolFn.en-US.md#112-record)
+      - [1.1.2.1 Basic Record](docs/toolFn.en-US.md#1121-basic-record)
+      - [1.1.2.2 Import Record](docs/toolFn.en-US.md#1122-import-record)
+- [Type Annotations](docs/note.en-US.md#type-annotations)
+  - [1.1 Single-line annotations](docs/note.en-US.md#11-single-line-annotations)
+  - [1.2 Single-line annotations with default value](docs/note.en-US.md#12-single-line-annotations-with-default-value)
+  - [1.3 Multi-line annotations](docs/note.en-US.md#13-multi-line-annotations)
+  - [1.4 Multi-line annotations with default value](docs/note.en-US.md#14-multi-line-annotations-with-default-value)
+  - [1.5 Mixed annotations with default value](docs/note.en-US.md#15-mixed-annotations-with-default-value)
 
-- [接口](docs/interface.md)
-  - [1.1简单类型](docs/interface.md#接口)
-  - [1.2联合类型](docs/interface.md#12联合类型)
-  - [1.3交叉类型](docs/interface.md#13交叉类型)
-  - [1.4数组类型](docs/interface.md#14数组类型)
-    - [1.4.1简单数组类型](docs/interface.md#141简单数组类型)
-    - [1.4.2复杂数组类型](docs/interface.md#142复杂数组类型)
-  - [1.5嵌套](docs/interface.md#15嵌套)
-    - [1.5.1简单嵌套](docs/interface.md#151简单嵌套)
-    - [1.5.2联合嵌套](docs/interface.md#152联合嵌套)
-    - [1.5.3交叉嵌套](docs/interface.md#153交叉嵌套)
-    - [1.5.4数组交叉](docs/interface.md#154数组交叉)
-    - [1.5.5循环嵌套](docs/interface.md#155循环嵌套)
-  - [1.6索引类型](docs/interface.md#16索引类型)
-- [模块](docs/module.md#模块)
-  - [1.1简单导出](docs/module.md#11简单导出)
-  - [1.2导出重命名](docs/module.md#12导出重命名)
-- [继承](docs/extends.md#继承)
-  - [1.1简单继承](docs/extends.md#11简单继承)
-  - [1.2多继承](docs/extends.md#12多继承)
-- [枚举](docs/enum.md#枚举)
-  - [1.1数字枚举](docs/enum.md#11数字枚举)
-  - [1.2字符串枚举](docs/enum.md#12字符串枚举)
-  - [1.3计算枚举](docs/enum.md#13计算枚举)
-  - [1.4复杂枚举](docs/enum.md#14复杂枚举)
-    - [1.4.1简单接口转枚举](docs/enum.md#141简单接口转枚举)
-    - [1.4.2复杂接口转枚举](docs/enum.md#142复杂接口转枚举)
-- [泛型](docs/generic.md#泛型)
-  - [1.1简单](docs/generic.md#11简单)
-  - [1.2复杂泛型](docs/generic.md#12复杂泛型)
-- [命名空间](docs/namespace.md#命名空间)
-  - [1.1简单](docs/namespace.md#11简单)
-  - [1.2复杂](docs/namespace.md#12复杂)
-- [type类型](docs/type.md#type类型)
-  - [1.1基本类型](docs/type.md#11基本类型)
-  - [1.2复杂](docs/type.md#12复杂)
-    - [1.2.1联合类型](docs/type.md#121联合类型)
-    - [1.2.2联合数组](docs/type.md#122联合数组)
-    - [1.2.2引用枚举](docs/type.md#122引用枚举)
-- [工具函数](docs/toolFn.md#工具函数)
-  - [1.1对象工具](docs/toolFn.md#11对象工具)
-    - [1.1.1Omit](docs/toolFn.md#111omit)
-      - [1.1.1.1简单](docs/toolFn.md#1111简单)
-      - [1.1.1.2联合](docs/toolFn.md#1112联合)
-      - [1.1.1.3引入](docs/toolFn.md#1113引入)
-    - [1.1.2Pick](docs/toolFn.md#112pick)
-      - [1.1.2.1简单](docs/toolFn.md#1121简单)
-      - [1.1.2.2引入](docs/toolFn.md#1122引入)
-- [注释](docs/note.md#注释)
-  - [1.1单行注释](docs/note.md#11单行注释)
-  - [1.2单行注释默认值](docs/note.md#12单行注释默认值)
-  - [1.3多行注释](docs/note.md#13多行注释)
-  - [1.4多行注释默认值](docs/note.md#14多行注释默认值)
-  - [1.5单行多行注释默认值](docs/note.md#15单行多行注释默认值)
+## Contribution
 
-## 贡献
+Contributions are extremely welcomed by our team, you can contribute to this repository by several ways below.
 
-我们非常欢迎您的贡献，您可以通过以下方式与我们共建。
-
-- 提交[GitHub 问题](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/issues)以报告错误或提出问题。
-- 提出[拉取请求](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/pulls)以改进我们的代码。
-- [贡献指南](CONTRIBUTING.md)。
+- Submit [GitHub Issue](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/issues) to report errors or ask questions
+- Create [Pull Request](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/pulls) to improve our code
+- [Contribution guide](./CONTRIBUTING.en-US.md)
