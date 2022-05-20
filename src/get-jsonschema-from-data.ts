@@ -313,15 +313,19 @@ export default class genTypeSchema extends typescriptToFileDatas {
       let $refJson = fileJson[firstKey] || fileJson[$refKey] || {};
       $refJson = _.cloneDeep($refJson)
 
+      if ((entry as any).keySet.has($refKey)) {
+        (entry as any).refKeyTime[$refKey] = ((entry as any).refKeyTime[$refKey] || 0) + 1;
+        // 处理namespace方式导入的types
+        if ($refJson.type === ImportType.ImportNamespaceSpecifier) {
+          $refKey = otherKeys.join('.');
+        }
+        item.$ref = `#/definitions/${$refKey}`;
+        return $refJson;
+      }
+
       // 处理namespace方式导入的types
       if ($refJson.type === ImportType.ImportNamespaceSpecifier) {
         $refKey = otherKeys.join('.');
-      }
-
-      if ((entry as any).keySet.has($refKey)) {
-        (entry as any).refKeyTime[$refKey] = ((entry as any).refKeyTime[$refKey] || 0) + 1;
-        item.$ref = `#/definitions/${$refKey}`;
-        return $refJson;
       }
 
       (entry as any).keySet.add($refKey);
