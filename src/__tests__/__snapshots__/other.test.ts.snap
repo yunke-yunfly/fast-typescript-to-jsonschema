@@ -270,6 +270,63 @@ Object {
       ],
       "type": "number",
     },
+    "ParamsRule.Level": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "boolean",
+        },
+        "b": Object {
+          "type": "boolean",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+        "d": Object {
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+    "ParamsRule.PAll": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "level": Object {
+          "$ref": "#ParamsRule.Level",
+        },
+        "pObject": Object {
+          "$ref": "#ParamsRule.PObject",
+        },
+      },
+      "type": "object",
+    },
+    "ParamsRule.PEnum": Object {
+      "enum": Array [
+        "enum0",
+      ],
+      "type": "string",
+    },
+    "ParamsRule.PObject": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "$ref": "#ParamsRule.Level",
+        },
+        "b": Object {
+          "$ref": "#ParamsRule.PEnum",
+        },
+        "c": Object {
+          "items": Object {
+            "$ref": "#ParamsRule.PEnum",
+          },
+          "type": "array",
+        },
+      },
+      "required": Array [
+        "a",
+      ],
+      "type": "object",
+    },
   },
   "/jest/other.ts": Object {
     "AAA": Object {
