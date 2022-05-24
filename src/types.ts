@@ -43,12 +43,14 @@ export interface TypeAnnotationConfig {
   file?: string;
   attrKey?: string;
   refKey?: string;
+  namespaces?: string[];
 }
 
 export interface TSTypeAnnotationConfig {
   node: AnyOption;
   parentKey?: string;
   file?: string;
+  namespaces?: string[];
 }
 
 export type EntryType = { keySet: Set<string>; times: number };

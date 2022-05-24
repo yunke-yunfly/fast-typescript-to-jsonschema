@@ -139,3 +139,77 @@ Object {
   "type": "object",
 }
 `;
+
+exports[`namespace案例_5 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "ParamsRule.Level": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "boolean",
+        },
+        "b": Object {
+          "type": "boolean",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+        "d": Object {
+          "type": "boolean",
+        },
+      },
+      "type": "object",
+    },
+    "ParamsRule.PAll": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "level": Object {
+          "$ref": "#/definitions/ParamsRule.Level",
+        },
+        "pObject": Object {
+          "$ref": "#/definitions/ParamsRule.PObject",
+        },
+      },
+      "type": "object",
+    },
+    "ParamsRule.PEnum": Object {
+      "enum": Array [
+        "enum0",
+      ],
+      "type": "string",
+    },
+    "ParamsRule.PObject": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "$ref": "#/definitions/ParamsRule.Level",
+        },
+        "b": Object {
+          "$ref": "#/definitions/ParamsRule.PEnum",
+        },
+        "c": Object {
+          "items": Object {
+            "$ref": "#/definitions/ParamsRule.PEnum",
+          },
+          "type": "array",
+        },
+      },
+      "required": Array [
+        "a",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "other1": Object {
+      "$ref": "#/definitions/ParamsRule.PAll",
+    },
+  },
+  "required": Array [
+    "other1",
+  ],
+  "type": "object",
+}
+`;

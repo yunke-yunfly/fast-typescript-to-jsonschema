@@ -37,3 +37,27 @@ export namespace Param_1 {
     name: string;
   }
 }
+
+export namespace ParamsRule {
+  export interface Level {
+    a?: boolean;
+    b?: boolean;
+    c?: boolean;
+    d?: boolean;
+  }
+
+  export enum PEnum {
+    'enum0' = 'enum0'
+  }
+
+  export interface PObject {
+    a: Level;
+    b?: PEnum;
+    c?: PEnum[];
+  }
+
+  export interface PAll {
+    level?: Level;
+    pObject?: PObject;
+  }
+}

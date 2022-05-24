@@ -1,4 +1,4 @@
-import { Param, Param_1 } from './common';
+import { Param, Param_1, ParamsRule } from './common';
 import * as Type from './common';
 
 export interface Namespace_1 {
@@ -17,4 +17,8 @@ export interface Namespace_4 {
   other1: Param.C.D.E.F.GetBaseDetailResponse;
   other2: Param_1.A;
   other3: Param_1.Label;
+}
+
+export interface Namespace_5 {
+  other1: ParamsRule.PAll
 }

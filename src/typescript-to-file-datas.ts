@@ -81,7 +81,7 @@ export default class typescriptToFileDatas {
     parentJson: null | AnyOption,
     option: TSTypeAnnotationConfig,
   ): void {
-    const { node, parentKey, file } = option || {};
+    const { node, parentKey, file, namespaces } = option || {};
 
     const key = _.get(node, 'key.name') || _.get(node, 'key.value') || '';
     const required = !node.optional;
@@ -92,6 +92,7 @@ export default class typescriptToFileDatas {
       typeAnnotation: node.typeAnnotation,
       file,
       attrKey: key,
+      namespaces,
     });
 
     if (typeAnnotation && typeof typeAnnotation === 'object') {
@@ -338,7 +339,7 @@ export default class typescriptToFileDatas {
             }
             const key = _.get(path, 'node.key.name') || _.get(path, 'node.key.value');
 
-            _this.handleTSTypeAnnotation(json, null, { node: path.node, file });
+            _this.handleTSTypeAnnotation(json, null, { node: path.node, file, namespaces, });
 
             path.traverse({
               TSTypeLiteral(path: AnyOption) {
@@ -352,6 +353,7 @@ export default class typescriptToFileDatas {
                       node: path.node,
                       parentKey: key,
                       file,
+                      namespaces,
                     });
                   },
                 });
@@ -576,10 +578,12 @@ export default class typescriptToFileDatas {
    * @param {AnyOption} typeAnnotation
    * @returns {any} {string}
    */
-  getTypeName(typeName: AnyOption): string {
+  getTypeName(typeName: AnyOption, namespaces?: string[]): string {
     const name = _.get(typeName, 'name');
-
     if (name) {
+      if (typeName.type === 'Identifier' && Array.isArray(namespaces) && namespaces.length) {
+        return `${namespaces.join('.')}.${name}`
+      }
       return name;
     }
     const { left, right } = typeName || {};
@@ -624,7 +628,7 @@ export default class typescriptToFileDatas {
    * @returns {any}
    */
   transformTypeAnnotation(option: TypeAnnotationConfig): AnyOption | null {
-    const { typeAnnotation, file, attrKey, refKey } = option || {};
+    const { typeAnnotation, file, attrKey, refKey, namespaces } = option || {};
     if (!typeAnnotation) return null;
     const cType = _.get(typeAnnotation, 'type');
     if (!cType) return null;
@@ -648,10 +652,8 @@ export default class typescriptToFileDatas {
 
     // 处理 Number/自定义 等类型
     if (cType === 'TSTypeReference') {
-      const name = this.getTypeName(typeAnnotation.typeName);
-
+      const name = this.getTypeName(typeAnnotation.typeName, namespaces);
       const type = this.handleRelationTypes(name);
-
       let items = null;
       if (typeAnnotation.typeParameters) {
         items = this.transformTypeAnnotation({
@@ -659,6 +661,7 @@ export default class typescriptToFileDatas {
           file,
           attrKey,
           refKey: name,
+          namespaces,
         });
       }
       // promise 特殊处理
@@ -698,7 +701,12 @@ export default class typescriptToFileDatas {
     if (cType === 'TSTypeParameterInstantiation') {
       const params: (AnyOption | null)[] = [];
       typeAnnotation.params.forEach((item: AnyOption) => {
-        const res = this.transformTypeAnnotation({ typeAnnotation: item, file, attrKey });
+        const res = this.transformTypeAnnotation({
+          typeAnnotation: item,
+          file,
+          attrKey,
+          namespaces,
+        });
         if (res) {
           params.push(res);
         }
@@ -718,6 +726,7 @@ export default class typescriptToFileDatas {
         typeAnnotation: typeAnnotation.typeAnnotation,
         file,
         attrKey,
+        namespaces,
       });
     }
 
@@ -727,6 +736,7 @@ export default class typescriptToFileDatas {
         typeAnnotation: typeAnnotation.elementType,
         file,
         attrKey,
+        namespaces,
       });
       return type ? { type: 'array', items: type } : null;
     }
@@ -737,6 +747,7 @@ export default class typescriptToFileDatas {
         typeAnnotation: typeAnnotation.typeAnnotation,
         file,
         attrKey,
+        namespaces,
       });
       return type;
     }
@@ -745,7 +756,7 @@ export default class typescriptToFileDatas {
       const members = typeAnnotation.members || [];
       const json = { type: 'object', properties: {}, required: [] };
       members.forEach((item: AnyOption) => {
-        this.handleTSTypeAnnotation(json, null, { node: item, file });
+        this.handleTSTypeAnnotation(json, null, { node: item, file, namespaces, });
       });
 
       this.formatJsonSchema(json);

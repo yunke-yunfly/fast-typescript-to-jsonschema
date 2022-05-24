@@ -25,3 +25,7 @@ test('namespace案例_3', () => {
 test('namespace案例_4', () => {
   expect(getSchema('Namespace_4')).toMatchSnapshot();
 });
+
+test('namespace案例_5', () => {
+  expect(getSchema('Namespace_5')).toMatchSnapshot();
+});
