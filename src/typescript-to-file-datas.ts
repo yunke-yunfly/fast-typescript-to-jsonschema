@@ -450,7 +450,7 @@ export default class typescriptToFileDatas {
         // 行内注释
         let { description, tags } = doctrine.parse(next.value, {
           unwrap: true,
-          tags: ['param'],
+          tags: ['param', 'description'],
           sloppy: true,
         });
         let tags_: AnyOption[] = [];
@@ -476,7 +476,12 @@ export default class typescriptToFileDatas {
       }
       if (next.type === 'CommentBlock') {
         // 块注释
-        const result = doctrine.parse(next.value, { unwrap: true, tags: ['param'], sloppy: true });
+        const result = doctrine.parse(next.value, {
+          unwrap: true,
+          tags: ['param', 'description'],
+          sloppy: true
+        });
+
         const description = _.get(result, 'description') || '';
         const tags = _.get(result, 'tags') || [];
 
@@ -536,7 +541,11 @@ export default class typescriptToFileDatas {
     const result = description.reduce((prev, next: AnyOption) => {
       const tags = _.get(next, 'tags') || [];
       tags.forEach((item: AnyOption) => {
-        json[item.name] = item;
+        if (item.tag === 'description') {
+          json.description_ = item.description
+        } else {
+          json[item.name] = item;
+        }
       });
 
       if (!next.description) {
