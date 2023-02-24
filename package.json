@@ -1,6 +1,6 @@
 {
   "name": "fast-typescript-to-jsonschema",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "fast-typescript-to-jsonschema generates JSON Schema files from your Typescript sources.",
   "main": "./dist/index.js",
   "typings": "dist/index.d.ts",

@@ -122,19 +122,86 @@ export default class typescriptToFileDatas {
    * @param {string} file
    * @returns {any} {string}
    */
-  handleFilterFiles(file: string): string {
-    const res = this.filterFiles.filter((item: string) => file.indexOf(item) > -1);
+  handleFilterFiles(file: string): { filePath: string, fileType: 'import' | 'npm' } | undefined {
+    const res = this.filterFiles.filter((item: string) => file === item);
     // 过滤不需要匹配的文件
     if (res.length) {
-      return '';
+      return;
+    }
+
+    // import 文件
+    if (file === '.' || file === '/') {
+      return { filePath: 'index', fileType: 'import' };
     }
 
     if (file.indexOf('./') > -1 || file.indexOf('../') > -1) {
-      return file;
+      return { filePath: file, fileType: 'import' };
     }
 
-    // 不解析npm包
-    return '';
+    // npm包
+    return { filePath: file, fileType: 'npm' };
+  }
+
+  getTypeFileFromNpm({ sourceValue }: { sourceValue: string }) {
+    // 1. 优先查找 index.d.ts 其次查找 ${sourceValue}.d.ts
+    const sourceValueArr = sourceValue.split('/');
+    const possibleExt: any = sourceValueArr.splice(sourceValueArr.length - 1, 1)[0];
+    let possibleExtArr: string[] = [];
+    possibleExt ?
+      possibleExtArr.push(`${possibleExt}/index.d.ts`, `${possibleExt}.d.ts`) :
+      possibleExtArr.push('index.d.ts');
+    possibleExtArr = possibleExtArr.map(item => sourceValueArr ? `${sourceValueArr.join('/')}/${item}` : item);
+    let source = ''
+    for (const possibleExt of possibleExtArr) {
+      const possibleFile = path.resolve(process.cwd(), 'node_modules', possibleExt);
+      if (fs.existsSync(possibleFile)) {
+        source = possibleFile;
+        break;
+      }
+    }
+    // 2. 查找 package.json.typings 或 index.d.ts
+    if (!source) {
+      const possibleFile = path.resolve(process.cwd(), 'node_modules', sourceValue, 'package.json');
+      if (fs.existsSync(possibleFile)) {
+        const packageJson = require(possibleFile);
+        const typingFile = packageJson.typings || packageJson.types;
+        if (typingFile) {
+          const possibleFile = path.resolve(process.cwd(), 'node_modules', sourceValue, typingFile);
+          if (fs.existsSync(possibleFile)) source = possibleFile;
+        } else {
+          const possibleFile = path.resolve(process.cwd(), 'node_modules', sourceValue, 'index.d.ts');
+          if (fs.existsSync(possibleFile)) source = possibleFile;
+        }
+      }
+    }
+    // 3. 查找 @types/xxx
+    if (!source) {
+      const possibleFile = path.resolve(process.cwd(), 'node_modules', '@types', sourceValue, 'package.json');
+      if (fs.existsSync(possibleFile)) {
+        const packageJson = require(possibleFile);
+        const typingFile = packageJson.typings || packageJson.types;
+        if (typingFile) {
+          const possibleFile = path.resolve(process.cwd(), 'node_modules', '@types', sourceValue, typingFile);
+          if (fs.existsSync(possibleFile)) source = possibleFile;
+        }
+      }
+    }
+    // 避免重复处理
+    this.filterFiles = [...this.filterFiles, sourceValue];
+    return source
+  }
+
+  getTypeFileFromImport({ dir, sourceValue, ext }: { dir: string; sourceValue: string; ext: string }) {
+    let source = '';
+    // 找依赖的文件,优先级 .ts >> .d.ts >> /index.ts >> /index.d.ts
+    for (const possibleExt of ['', '.d', '/index', '/index.d']) {
+      const possibleFile = path.resolve(dir, sourceValue + possibleExt + ext);
+      if (fs.existsSync(possibleFile)) {
+        source = possibleFile;
+        break;
+      }
+    }
+    return source;
   }
 
   /**
@@ -165,21 +232,16 @@ export default class typescriptToFileDatas {
         const sourceValue = _.get(path_, 'node.source.value');
         if (!sourceValue) return;
 
-        const filePath = _this.handleFilterFiles(sourceValue);
+        const { filePath, fileType } = _this.handleFilterFiles(sourceValue) || {};
+
         if (!filePath) {
           path_.skip();
           return;
         }
 
-        let source = '';
-        // 找依赖的文件,优先级 .ts >> .d.ts >> /index.ts >> /index.d.ts
-        for (const possibleExt of ['', '.d', '/index', '/index.d']) {
-          const possibleFile = path.resolve(dir, sourceValue + possibleExt + ext);
-          if (fs.existsSync(possibleFile)) {
-            source = possibleFile;
-            break;
-          }
-        }
+        const source = fileType === 'import' ?
+          _this.getTypeFileFromImport({ dir, sourceValue: filePath, ext }) :
+          _this.getTypeFileFromNpm({ sourceValue: filePath })
 
         if (!source) return;
 
@@ -378,36 +440,39 @@ export default class typescriptToFileDatas {
         const tsTypeName = path.get('id').toString();
         const key = namespaces.length ? `${namespaces.join('.')}.${tsTypeName}` : tsTypeName;
         const members = path.get('members');
-
         const memberMap = new Map();
+        let jsonType: string = ''
+
         const enumKeys = members.reduce((accEnumKeys: (number | string)[], member: any) => {
-          const type = _this.simpleTsTypeTransform(member.get('initializer').type);
+          const type = _this.simpleTsTypeTransform(member.get('initializer').type) || 'number';
           let value = member.get('initializer').toString().replace(/'/g, '');
           const prevEnumKey = accEnumKeys.length ? accEnumKeys[accEnumKeys.length - 1] : -1;
+          const nameObj = member.get('name');
+          const name = _.get(nameObj, 'container.id.name') || _.get(nameObj, 'container.id.value');
 
-          const name = _.get(member.get('name'), 'container.id.name');
+          if (!jsonType) {
+            jsonType = type;
+          } else if (jsonType !== type) {
+            jsonType = 'any';
+          }
 
           if (value === '') {
             value = (prevEnumKey as number) + 1;
-          } else {
+          } else if (type === 'number') {
             try {
               [...memberMap.keys()].forEach((memberName) => {
                 value = value.replace(new RegExp(memberName, 'g'), memberMap.get(memberName));
               });
-              // eslint-disable-next-line no-eval
               value = eval(value);
-            } catch (error) {
-              if (json.type && json.type !== 'string') {
-                value = NaN;
-              }
-            }
+            } catch (error) {/* do nothing */ }
           }
           memberMap.set(name, value);
-
-          if (!json.type) json.type = type || 'number';
-
           return [...accEnumKeys, value];
         }, []);
+
+        if (jsonType && jsonType !== 'any') {
+          json.type = jsonType;
+        }
 
         json.enum = enumKeys;
         if (!json.enum.length) {
@@ -645,7 +710,7 @@ export default class typescriptToFileDatas {
 
     // 处理any|never|null类型 转换为object类型
     if (type === 'any' || type === 'never' || type === 'null') {
-      if (file && attrKey) {
+      if (file && attrKey && !file.includes('.d.ts')) {
         (console as Console).warn(
           chalk.yellow(`警告：%s 文件下的【%s】属性，不推荐定义为【%s】它将会被解析为object类型。`),
           file,
@@ -889,10 +954,10 @@ export default class typescriptToFileDatas {
     });
 
     if (isEmpty) {
-      if (file && attrKey) {
+      if (file && attrKey && !file.includes('.d.ts')) {
         (console as Console).warn(
           chalk.yellow(
-            `警告：% s 文件下的【% s】属性，类型定义较复杂，请考虑简化，它将会被解析为object类型。`,
+            `警告：%s 文件下的【%s】属性，类型定义较复杂，请考虑简化，它将会被解析为object类型。`,
           ),
           file,
           attrKey,
