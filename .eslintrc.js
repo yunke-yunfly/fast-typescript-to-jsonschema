@@ -14,6 +14,9 @@ module.exports = {
     'no-restricted-syntax': 0,
     'consistent-return': [0, { treatUndefinedAsUnspecified: true }],
     '@typescript-eslint/no-use-before-define': [0, { functions: true }],
+    'global-require': 0,
+    'import/no-dynamic-require': 0,
+    'no-eval': 0,
   },
   ignorePatterns: ['src/__tests__/**', 'rollup.config.js', 'commitlint.config.js'],
 };

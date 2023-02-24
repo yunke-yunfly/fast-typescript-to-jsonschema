@@ -254,9 +254,8 @@ exports[`枚举_5 1`] = `
 Object {
   "enum": Array [
     0,
-    NaN,
+    "YES",
   ],
-  "type": "number",
 }
 `;
 

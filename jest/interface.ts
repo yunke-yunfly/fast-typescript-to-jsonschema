@@ -1,5 +1,6 @@
 import { AAA, BBB, Param } from './common';
 import { JSONSchema4TypeName } from 'json-schema'
+import * as npm from './npm'
 
 interface Interface_0 {
   attr: any;

@@ -542,7 +542,18 @@ exports[`Interface引用过滤文件_1 1`] = `
 Object {
   "additionalProperties": false,
   "definitions": Object {
-    "AAA": Object {},
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "other1": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "other1",
+      ],
+      "type": "object",
+    },
   },
   "properties": Object {
     "attr": Object {
