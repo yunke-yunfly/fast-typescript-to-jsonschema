@@ -1,6 +1,6 @@
 # fast-typescript-to-jsonschema
 
-[![npm version](https://img.shields.io/npm/v/fast-typescript-to-jsonschema.svg)](https://www.npmjs.com/package/fast-typescript-to-jsonschema) 
+[![npm version](https://img.shields.io/npm/v/fast-typescript-to-jsonschema.svg)](https://www.npmjs.com/package/fast-typescript-to-jsonschema)
 ![Test](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/workflows/Test/badge.svg)
 [![codecov](https://codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema/branch/master/graph/badge.svg)](https://app.codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema)
 
@@ -33,6 +33,8 @@ interface ITest {
 
 3. create `test.js`
 
+3.1. gen jsonschema from file.
+
 ```js
 const { default: genTypeSchema } = require('fast-typescript-to-jsonschema');
 const path = require('path');
@@ -48,6 +50,31 @@ const json = genTypeSchema.genJsonData();
 
 // get jsonschema of specific type
 const jsonSchema = genTypeSchema.getJsonSchema(file, 'ITest');
+
+// result
+console.log(jsonSchema); 
+```
+
+3.2. gen jsonschema from code.
+
+```js
+const { default: genTypeSchema } = require('fast-typescript-to-jsonschema');
+
+const code = `
+interface ITest {
+  attr1: string;
+  attr2: number;
+  attr3?: boolean;
+}
+`
+// generate data
+genTypeSchema.genJsonDataFromCode(code);
+
+// get all jsonschema data of current file
+const json = genTypeSchema.genJsonData();
+
+// get jsonschema of specific type
+const jsonSchema = genTypeSchema.getJsonSchema('ITest');
 
 // result
 console.log(jsonSchema); 
@@ -161,7 +188,7 @@ result:
   - [1.2 Named Export Modules](docs/module.en-US.md#12-named-export-modules)
 - [Extending Types](docs/extends.en-US.md#extending-types)
   - [1.1 Basic Extending Types](docs/extends.en-US.md#11-basic-extending-types)
-  - [1.2 Multiple Extending Types ](docs/extends.en-US.md#12-multiple-extending-types)
+  - [1.2 Multiple Extending Types](docs/extends.en-US.md#12-multiple-extending-types)
 - [Enums](docs/enum.en-US.md#enums)
   - [1.1 Numeric Enums](docs/enum.en-US.md#11-numeric-enums)
   - [1.2 String Enums](docs/enum.en-US.md#12-string-enums)

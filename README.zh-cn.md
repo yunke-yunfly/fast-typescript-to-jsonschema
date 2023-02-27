@@ -1,6 +1,6 @@
 # fast-typescript-to-jsonschema
 
-[![npm version](https://img.shields.io/npm/v/fast-typescript-to-jsonschema.svg)](https://www.npmjs.com/package/fast-typescript-to-jsonschema) 
+[![npm version](https://img.shields.io/npm/v/fast-typescript-to-jsonschema.svg)](https://www.npmjs.com/package/fast-typescript-to-jsonschema)
 ![Test](https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/workflows/Test/badge.svg)
 [![codecov](https://codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema/branch/master/graph/badge.svg)](https://app.codecov.io/gh/yunke-yunfly/fast-typescript-to-jsonschema)
 
@@ -31,7 +31,9 @@ interface ITest {
 }
 ```
 
-3.创建`test.js`文件，内容如下:
+3. 创建`test.js`文件，内容如下:
+
+3.1 通过文件生成 jsonschema
 
 ```js
 const { default: genTypeSchema } = require('fast-typescript-to-jsonschema');
@@ -50,6 +52,31 @@ const json = genTypeSchema.genJsonData();
 const jsonSchema = genTypeSchema.getJsonSchema(file, 'ITest');
 
 // 返回结果
+console.log(jsonSchema); 
+```
+
+3.2 通过 code 生成 jsonschema
+
+```js
+const { default: genTypeSchema } = require('fast-typescript-to-jsonschema');
+
+const code = `
+interface ITest {
+  attr1: string;
+  attr2: number;
+  attr3?: boolean;
+}
+`
+// generate data
+genTypeSchema.genJsonDataFromCode(code);
+
+// get all jsonschema data of current file
+const json = genTypeSchema.genJsonData();
+
+// get jsonschema of specific type
+const jsonSchema = genTypeSchema.getJsonSchema('ITest');
+
+// result
 console.log(jsonSchema); 
 ```
 
@@ -84,7 +111,7 @@ node ./test.js
 ```
 
 - example 案例地址：
-https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/tree/master/example
+<https://github.com/yunke-yunfly/fast-typescript-to-jsonschema/tree/master/example>
 
 ## 注释
 
@@ -140,7 +167,6 @@ interface Interface_4 {
   "type": "object",
 }
 ```
-
 
 > 更多支持的类型解析[请看](docs/index.md),目录如下:
 

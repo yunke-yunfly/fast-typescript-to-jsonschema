@@ -8,6 +8,18 @@ import type { AnyOption } from './types';
 
 type AstType = Node | Node[] | null | undefined;
 
+const parseConfig: AnyOption = {
+  sourceType: 'unambiguous',
+  allowImportExportEverywhere: true,
+  allowAwaitOutsideFunction: true,
+  allowReturnOutsideFunction: true,
+  allowSuperOutsideMethod: true,
+  allowUndeclaredExports: true,
+  createParenthesizedExpressions: true,
+  errorRecovery: true,
+  plugins: ['typescript', 'decorators-legacy'],
+};
+
 /**
  * 文件生成ast树 ast报错继续解析
  *
@@ -16,19 +28,24 @@ type AstType = Node | Node[] | null | undefined;
  */
 export function genAst(file: string): AnyOption | null {
   try {
-    const parseConfig: AnyOption = {
-      sourceType: 'unambiguous',
-      allowImportExportEverywhere: true,
-      allowAwaitOutsideFunction: true,
-      allowReturnOutsideFunction: true,
-      allowSuperOutsideMethod: true,
-      allowUndeclaredExports: true,
-      createParenthesizedExpressions: true,
-      errorRecovery: true,
-      plugins: ['typescript', 'decorators-legacy'],
-    };
     const fileContent = fs.readFileSync(file).toString();
     const ast: AstType = parse(fileContent, parseConfig);
+    return ast;
+  } catch (err) {
+    return null;
+  }
+}
+
+/**
+ * 代码生成ast树 ast报错继续解析
+ *
+ * @export
+ * @param {string} code
+ * @return {*}  {(AnyOption | null)}
+ */
+export function genAstFromCode(code: string): AnyOption | null {
+  try {
+    const ast: AstType = parse(code, parseConfig);
     return ast;
   } catch (err) {
     return null;

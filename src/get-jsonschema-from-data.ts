@@ -32,12 +32,20 @@ export default class genTypeSchema extends typescriptToFileDatas {
    */
   getJsonSchema(
     file: string,
-    type: string,
+    type?: string,
     entry?: { keySet: Set<string>; refKeyTime: Record<string, number> },
+    isLast?: boolean
   ): AnyOption {
     if (!entry) {
       entry = { keySet: new Set(), refKeyTime: {} };
     }
+
+    // 支持输入的是 code 场景
+    if (file && !type) {
+      type = file;
+      file = 'index.ts';
+    }
+
     if (!file || !type) return { type: 'object' };
 
     // 处理 Param.C.D.E.F.GetBaseDetailResponse 这种外部导入路径
@@ -60,7 +68,12 @@ export default class genTypeSchema extends typescriptToFileDatas {
           refFile,
           typeJson.from ? type.replace(/.+?(?=\.)|.+/, typeJson.from) : type,
           entry,
+          true,
         );
+
+        if (!isLast && typeJson.typeParams) {
+          delete typeJson.typeParams
+        }
 
         return typeJson;
       }
@@ -85,6 +98,11 @@ export default class genTypeSchema extends typescriptToFileDatas {
       }
       typeJson.definitions[type] = cloneTypeJson;
     }
+
+    if (!isLast && typeJson.typeParams) {
+      delete typeJson.typeParams
+    }
+
     return typeJson;
   }
 
@@ -200,7 +218,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
         // 别的文件ref
         if (realRef.$ref && realRef.type !== ImportType.ImportNamespaceSpecifier) {
           const refFile = realRef.$ref.replace(/#\/definitions|#/, '');
-          const realSchema = this.getJsonSchema(refFile, result.$realRef);
+          const realSchema = this.getJsonSchema(refFile, result.$realRef, undefined, true);
           delete realRef.$ref;
           delete realRef.from;
           Object.assign(realRef, realSchema);
@@ -280,10 +298,10 @@ export default class genTypeSchema extends typescriptToFileDatas {
 
     // 处理继承
     const handleExtends = (item: AnyOption) => {
-      const newTypeJson = this.getJsonSchema(file as string, item.extends, entry);
+      const newTypeJson = this.getJsonSchema(file as string, item.extends, entry, true);
       if (newTypeJson) {
         const result = newTypeJson.$ref
-          ? this.getJsonSchema(newTypeJson.$ref.replace(/#/g, ''), item.extends, entry)
+          ? this.getJsonSchema(newTypeJson.$ref.replace(/#/g, ''), item.extends, entry, true)
           : this.genJsonschema(fileJson, newTypeJson, entry);
         if (typeof result === 'object') {
           item = merge(result, item, {
@@ -358,6 +376,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
         $dependRefKey,
         $refJson.from ? $refKey.replace(/.+?(?=\.)|.+/, $refJson.from) : $refKey,
         entry,
+        true
       );
       handle && handleCommonRef(result, $refKey);
       return result;
@@ -650,6 +669,11 @@ export default class genTypeSchema extends typescriptToFileDatas {
     // anyOf|allOf
     allOfAnyOfHandle(typeJson);
 
+    // 处理泛型
+    if (typeJson.typeParams && Object.keys(typeJson.typeParams).length) {
+      handleGenericDefaultType(typeJson.properties, typeJson.typeParams);
+    }
+
     // 数组类型
     if (typeJson.type === 'array') {
       commonArrayHandle(typeJson);
@@ -659,7 +683,6 @@ export default class genTypeSchema extends typescriptToFileDatas {
     if (typeJson.extends) {
       typeJson = handleExtends(typeJson);
     }
-
 
     // 对象类型
     if (typeJson.properties && Object.keys(typeJson.properties)) {
