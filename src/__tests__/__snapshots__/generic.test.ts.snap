@@ -256,6 +256,28 @@ Object {
 }
 `;
 
+exports[`Generic类型_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "T": Object {},
+  },
+  "properties": Object {
+    "value1": Object {
+      "type": "string",
+    },
+    "value2": Object {
+      "$ref": "#/definitions/T",
+    },
+  },
+  "required": Array [
+    "value1",
+    "value2",
+  ],
+  "type": "object",
+}
+`;
+
 exports[`Generic默认值_类型_1 1`] = `
 Object {
   "additionalProperties": false,

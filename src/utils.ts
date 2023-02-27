@@ -44,7 +44,6 @@ export function genAst(file: string): AnyOption | null {
  * @return {*}  {(AnyOption | null)}
  */
 export function genAstFromCode(code: string): AnyOption | null {
-  if (!code) return null;
   try {
     const ast: AstType = parse(code, parseConfig);
     return ast;

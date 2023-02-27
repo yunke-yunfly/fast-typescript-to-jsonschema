@@ -32,7 +32,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
    */
   getJsonSchema(
     file: string,
-    type: string,
+    type?: string,
     entry?: { keySet: Set<string>; refKeyTime: Record<string, number> },
     isLast?: boolean
   ): AnyOption {

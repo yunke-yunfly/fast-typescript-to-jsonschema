@@ -22,6 +22,10 @@ test('Generic类型_2', () => {
   expect(getSchema('Generic_5')).toMatchSnapshot();
 });
 
+test('Generic类型_3', () => {
+  expect(getSchema('Generic_type_1')).toMatchSnapshot();
+});
+
 test('Generic默认值_类型_1', () => {
   expect(getSchema('Generic_7')).toMatchSnapshot();
 });

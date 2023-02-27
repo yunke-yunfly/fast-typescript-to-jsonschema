@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Type类型 1`] = `
+Object {
+  "anyOf": Array [
+    Object {
+      "type": "string",
+    },
+    Object {
+      "enum": Object {
+        "enum": Array [
+          "home",
+          "about",
+          "contact",
+        ],
+      },
+      "type": "string",
+    },
+  ],
+}
+`;
+
+exports[`嵌套接口 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "BBB": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "some": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "some",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "some": Object {
+      "$ref": "#/definitions/BBB",
+    },
+    "title": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "title",
+    "some",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`嵌套泛型 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {},
+  "properties": Object {
+    "value1": Object {
+      "type": "string",
+    },
+    "value2": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "value1",
+    "value2",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`枚举 1`] = `
+Object {
+  "enum": Array [
+    "Maintainer",
+    "Developer",
+  ],
+  "type": "string",
+}
+`;
+
+exports[`泛型 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "T": Object {},
+  },
+  "properties": Object {
+    "value1": Object {
+      "type": "string",
+    },
+    "value2": Object {
+      "$ref": "#/definitions/T",
+    },
+  },
+  "required": Array [
+    "value1",
+    "value2",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`简单接口 1`] = `
+Object {
+  "additionalProperties": false,
+  "properties": Object {
+    "some": Object {
+      "type": "string",
+    },
+  },
+  "required": Array [
+    "some",
+  ],
+  "type": "object",
+}
+`;
