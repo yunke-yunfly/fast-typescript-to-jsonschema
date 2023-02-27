@@ -34,6 +34,76 @@ Object {
 }
 `;
 
+exports[`Generic多层对象_类型_2 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Generic_8<string>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "value1": Object {
+          "additionalProperties": false,
+          "properties": Object {
+            "value2": Object {
+              "additionalProperties": false,
+              "properties": Object {
+                "value3": Object {
+                  "type": "string",
+                },
+              },
+              "required": Array [
+                "value3",
+              ],
+              "type": "object",
+            },
+          },
+          "required": Array [
+            "value2",
+          ],
+          "type": "object",
+        },
+      },
+      "required": Array [
+        "value1",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "value": Object {
+      "items": Object {
+        "$realRef": "Generic_8",
+        "$ref": "#/definitions/Generic_8<string>",
+      },
+      "type": "array",
+    },
+  },
+  "required": Array [
+    "value",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`Generic多层对象_类型_3 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {},
+  "properties": Object {
+    "value": Object {
+      "items": Object {
+        "type": "string",
+      },
+      "type": "array",
+    },
+  },
+  "required": Array [
+    "value",
+  ],
+  "type": "object",
+}
+`;
+
 exports[`Generic引用别的文件_类型_1 1`] = `
 Object {
   "additionalProperties": false,

@@ -7,7 +7,7 @@ import * as fs from 'fs';
 // types
 import type { AnyOption, TSTypeAnnotationConfig, TypeAnnotationConfig } from './types';
 // utils
-import { genAst } from './utils';
+import { genAst, genAstFromCode } from './utils';
 // require
 const chalk = require('chalk');
 const doctrine = require('doctrine');
@@ -142,6 +142,13 @@ export default class typescriptToFileDatas {
     return { filePath: file, fileType: 'npm' };
   }
 
+  /**
+   * 查找npm包types
+   *
+   * @param {{ sourceValue: string }} { sourceValue }
+   * @return {*} 
+   * @memberof typescriptToFileDatas
+   */
   getTypeFileFromNpm({ sourceValue }: { sourceValue: string }) {
     // 1. 优先查找 index.d.ts 其次查找 ${sourceValue}.d.ts
     const sourceValueArr = sourceValue.split('/');
@@ -191,6 +198,13 @@ export default class typescriptToFileDatas {
     return source
   }
 
+  /**
+   * 查找文件 import types
+   *
+   * @param {{ dir: string; sourceValue: string; ext: string }} { dir, sourceValue, ext }
+   * @return {*} 
+   * @memberof typescriptToFileDatas
+   */
   getTypeFileFromImport({ dir, sourceValue, ext }: { dir: string; sourceValue: string; ext: string }) {
     let source = '';
     // 找依赖的文件,优先级 .ts >> .d.ts >> /index.ts >> /index.d.ts
@@ -500,6 +514,19 @@ export default class typescriptToFileDatas {
     this.setJsonData(file, result);
 
     return { data: result, file };
+  }
+
+  /**
+   * 通过代码获得解析数据
+   *
+   * @param {string} code
+   * @return {*}  {AnyOption}
+   * @memberof typescriptToFileDatas
+   */
+  genJsonDataFromCode(code: string): AnyOption {
+    // ast
+    const ast_ = genAstFromCode(code);
+    return this.genJsonDataFormFile('index.ts', ast_);
   }
 
   /**
