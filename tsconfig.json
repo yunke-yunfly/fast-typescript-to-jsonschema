@@ -20,9 +20,14 @@
     "noEmitOnError": true,
     "noUnusedParameters": false,
     "strictPropertyInitialization": false,
-    "sourceMap": true,
+    "sourceMap": false,
     "declarationDir": "./dist/"
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "src/__tests__"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/__tests__"
+  ]
 }
