@@ -66,6 +66,213 @@ Object {
 }
 `;
 
+exports[`工具函数Omit_4 2`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Omit<{a:number;b:string;c:boolean;},\\"b\\">": Object {
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "required": Array [
+        "a",
+        "c",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "$ref": "#/definitions/Omit<{a:number;b:string;c:boolean;},\\"b\\">",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Omit_5 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Omit<{a:number;b:string;c:boolean;},\\"b\\"|\\"c\\">": Object {
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+      },
+      "required": Array [
+        "a",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "$ref": "#/definitions/Omit<{a:number;b:string;c:boolean;},\\"b\\"|\\"c\\">",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Omit_6 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Omit<AAA,\\"b\\"|\\"c\\">": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+      },
+      "required": Array [
+        "a",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "$ref": "#/definitions/Omit<AAA,\\"b\\"|\\"c\\">",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Omit_7 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "AAA": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "required": Array [
+        "a",
+        "b",
+        "c",
+      ],
+      "type": "object",
+    },
+    "Omit<AAA,\\"b\\"|\\"c\\"_1>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+      },
+      "required": Array [
+        "a",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "anyOf": Array [
+        Object {
+          "$ref": "#/definitions/AAA",
+        },
+        Object {
+          "$ref": "#/definitions/Omit<AAA,\\"b\\"|\\"c\\"_1>",
+        },
+      ],
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Omit_8 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Omit<AAA,\\"b\\"_0>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+      },
+      "required": Array [
+        "a",
+      ],
+      "type": "object",
+    },
+    "Omit<AAA,\\"b\\"_1>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "a": Object {
+          "type": "number",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "required": Array [
+        "a",
+        "c",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "anyOf": Array [
+        Object {
+          "items": Object {
+            "anyOf": Array [
+              Object {
+                "$ref": "#/definitions/Omit<AAA,\\"b\\"_0>",
+              },
+              Object {
+                "$ref": "#/definitions/AAA",
+              },
+            ],
+          },
+          "type": "array",
+        },
+        Object {
+          "$ref": "#/definitions/Omit<AAA,\\"b\\"_1>",
+        },
+      ],
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
 exports[`工具函数Partial_1 1`] = `
 Object {
   "additionalProperties": false,
@@ -286,6 +493,101 @@ Object {
 }
 `;
 
+exports[`工具函数Pick_3 2`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Pick<AAA,\\"b\\"|\\"c\\">": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "required": Array [
+        "b",
+        "c",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "$ref": "#/definitions/Pick<AAA,\\"b\\"|\\"c\\">",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Pick_4 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Pick<AAA,\\"b\\"_0>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "b": Object {
+          "type": "string",
+        },
+        "c": Object {
+          "type": "boolean",
+        },
+      },
+      "required": Array [
+        "b",
+        "c",
+      ],
+      "type": "object",
+    },
+    "Pick<AAA,\\"b\\"_1>": Object {
+      "additionalProperties": false,
+      "properties": Object {
+        "b": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "b",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "anyOf": Array [
+        Object {
+          "items": Object {
+            "anyOf": Array [
+              Object {
+                "$ref": "#/definitions/Pick<AAA,\\"b\\"_0>",
+              },
+              Object {
+                "$ref": "#/definitions/AAA",
+              },
+            ],
+          },
+          "type": "array",
+        },
+        Object {
+          "$ref": "#/definitions/Pick<AAA,\\"b\\"_1>",
+        },
+      ],
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
 exports[`工具函数Record_1 1`] = `
 Object {
   "additionalProperties": false,
@@ -344,6 +646,68 @@ Object {
     "home",
     "about",
     "contact",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Record_4 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Record<\\"home\\"|\\"about\\"|\\"contact\\"|number,string>": Object {
+      "additionalProperties": Object {
+        "type": "string",
+      },
+      "properties": Object {
+        "about": Object {
+          "type": "string",
+        },
+        "contact": Object {
+          "type": "string",
+        },
+        "home": Object {
+          "type": "string",
+        },
+      },
+      "required": Array [
+        "home",
+        "about",
+        "contact",
+      ],
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "$ref": "#/definitions/Record<\\"home\\"|\\"about\\"|\\"contact\\"|number,string>",
+    },
+  },
+  "required": Array [
+    "name",
+  ],
+  "type": "object",
+}
+`;
+
+exports[`工具函数Record_5 1`] = `
+Object {
+  "additionalProperties": false,
+  "definitions": Object {
+    "Record<Page|number,string>": Object {
+      "additionalProperties": Object {
+        "type": "string",
+      },
+      "type": "object",
+    },
+  },
+  "properties": Object {
+    "name": Object {
+      "$ref": "#/definitions/Record<Page|number,string>",
+    },
+  },
+  "required": Array [
+    "name",
   ],
   "type": "object",
 }

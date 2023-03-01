@@ -40,14 +40,17 @@ export interface JsonschemaToJsonConfig {
 
 export interface TypeAnnotationConfig {
   typeAnnotation: AnyOption;
+  path?: any;
   file?: string;
   attrKey?: string;
   refKey?: string;
   namespaces?: string[];
+  index?: number;
 }
 
 export interface TSTypeAnnotationConfig {
   node: AnyOption;
+  path?: any;
   parentKey?: string;
   file?: string;
   namespaces?: string[];
