@@ -480,14 +480,14 @@ export default class genTypeSchema extends typescriptToFileDatas {
           extra = _.cloneDeep(attrCommonHandle(extra, false) as AnyOption);
         }
         const extraKeys = extra.enum || [];
-        if (key === 'Omit') {
+        if (key.startsWith('Omit')) {
           const res = deleteJsonSchemaKeys(resType, extraKeys);
-          const $refKey = `Omit${randomString(10)}`;
+          const $refKey = key === 'Omit' ? `Omit${randomString(10)}` : key;
           return commonTsToolResHandle(res, $refKey);
         }
-        if (key === 'Pick') {
+        if (key.startsWith('Pick')) {
           const res = selectJsonSchemaKeys(resType, extraKeys);
-          const $refKey = `Pick${randomString(10)}`;
+          const $refKey = key === 'Pick' ? `Pick${randomString(10)}` : key;
           return commonTsToolResHandle(res, $refKey);
         }
       }
@@ -576,7 +576,7 @@ export default class genTypeSchema extends typescriptToFileDatas {
 
       if (!Object.keys(jsonSchema.definitions).length) delete jsonSchema.definitions;
 
-      const $refKey = `Record${randomString(10)}`;
+      const $refKey = key === 'Record' ? `Record${randomString(10)}` : key;
       return commonTsToolResHandle(jsonSchema, $refKey);
     };
 
@@ -586,25 +586,37 @@ export default class genTypeSchema extends typescriptToFileDatas {
       const items = _.get(item, 'items') || {};
       delete item.items;
       const { type = {}, extra, $ref } = items;
-      switch (key) {
-        case 'Omit':
-        case 'Pick':
-          return OmitPickHandle(key, type, extra);
-        case 'Record':
-          return RecordHandle(key, type, extra);
-        case 'Partial':
-        case 'Required':
-          return PartialRequiredHandle(key, $ref ? { $ref } : items);
-        default:
-          item.items = items;
+
+      if (
+        key.startsWith('Omit') ||
+        key.startsWith('Pick')
+      ) {
+        return OmitPickHandle(key, type, extra);
       }
+
+      if (key.startsWith('Record')) {
+        return RecordHandle(key, type, extra);
+      }
+
+      if (
+        key.startsWith('Partial') ||
+        key.startsWith('Required')) {
+        return PartialRequiredHandle(key, $ref ? { $ref } : items);
+      }
+
+      item.items = items;
     };
 
     const commonRefHandle = (item: AnyOption) => {
       if (!item.$ref) {
         return;
       }
-      if (_.get(item, 'items') && this.tsTollFn.includes(_.get(item, '$ref').replace(/#/, ''))) {
+
+      const handleRef = _.get(item, '$ref').replace(/#/, '');
+      if (
+        _.get(item, 'items') &&
+        this.tsTollFn.find(item => handleRef.startsWith(item))
+      ) {
         const res = handleTsToolFunction(item);
         delete item.$ref;
         res && Object.assign(item, res);

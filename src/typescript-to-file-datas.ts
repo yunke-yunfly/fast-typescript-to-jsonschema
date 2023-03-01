@@ -81,7 +81,7 @@ export default class typescriptToFileDatas {
     parentJson: null | AnyOption,
     option: TSTypeAnnotationConfig,
   ): void {
-    const { node, parentKey, file, namespaces } = option || {};
+    const { node, parentKey, file, namespaces, path } = option || {};
 
     const key = _.get(node, 'key.name') || _.get(node, 'key.value') || '';
     const required = !node.optional;
@@ -89,6 +89,7 @@ export default class typescriptToFileDatas {
     if (!key) return;
 
     const typeAnnotation = this.transformTypeAnnotation({
+      path,
       typeAnnotation: node.typeAnnotation,
       file,
       attrKey: key,
@@ -414,15 +415,13 @@ export default class typescriptToFileDatas {
               return;
             }
             const key = _.get(path, 'node.key.name') || _.get(path, 'node.key.value');
-
-            _this.handleTSTypeAnnotation(json, null, { node: path.node, file, namespaces, });
-
+            _this.handleTSTypeAnnotation(json, null, { node: path.node, path, file, namespaces, });
             path.traverse({
               TSTypeLiteral(path: AnyOption) {
                 if (path.parent.type === 'TSTypeParameterInstantiation' || path.parent.type === 'TSTypeAnnotation') {
                   return;
                 }
-                const childJson = { type: 'object', properties: {}, required: [] };
+                const childJson: any = { type: 'object', properties: {}, required: [] };
                 path.traverse({
                   TSPropertySignature(path: AnyOption) {
                     _this.handleTSTypeAnnotation(childJson, json, {
@@ -723,13 +722,33 @@ export default class typescriptToFileDatas {
   }
 
   /**
+   * 获取工具函数 $ref
+   *
+   * @param {{ name: string; path?: any, index?: number }} { name, path, index }
+   * @return {*}  {string}
+   * @memberof typescriptToFileDatas
+   */
+  getFnToolRefName({ name, path, index }: { name: string; path?: any, index?: number }): string {
+    let result = '';
+    path.traverse({
+      // 记录参数
+      TSTypeParameterInstantiation(path: AnyOption) {
+        result = typeof index === 'number' ?
+          `${name}<${path.get('params').toString().replace(/\r|\n|\s/g, '')}_${index}>` :
+          `${name}<${path.get('params').toString().replace(/\r|\n|\s/g, '')}>`;
+      }
+    })
+    return result || name;
+  }
+
+  /**
    * 递归处理ts类型解析
    *
    * @param {any} typeAnnotation
    * @returns {any}
    */
   transformTypeAnnotation(option: TypeAnnotationConfig): AnyOption | null {
-    const { typeAnnotation, file, attrKey, refKey, namespaces } = option || {};
+    const { typeAnnotation, file, attrKey, refKey, namespaces, path, index } = option || {};
     if (!typeAnnotation) return null;
     const cType = _.get(typeAnnotation, 'type');
     if (!cType) return null;
@@ -753,7 +772,11 @@ export default class typescriptToFileDatas {
 
     // 处理 Number/自定义 等类型
     if (cType === 'TSTypeReference') {
-      const name = this.getTypeName(typeAnnotation.typeName, namespaces);
+      let name = this.getTypeName(typeAnnotation.typeName, namespaces);
+      if (path && ['Omit', 'Pick', 'Record'].includes(name)) {
+        name = this.getFnToolRefName({ name, path, index });
+      }
+
       const type = this.handleRelationTypes(name);
       let items = null;
       if (typeAnnotation.typeParameters) {
@@ -763,6 +786,7 @@ export default class typescriptToFileDatas {
           attrKey,
           refKey: name,
           namespaces,
+          path
         });
       }
       // promise 特殊处理
@@ -788,7 +812,7 @@ export default class typescriptToFileDatas {
 
     // 联合类型 或 例如：number|string
     if (cType === 'TSUnionType') {
-      const result = this.handleAnyOfRelationDatas(typeAnnotation, file, attrKey);
+      const result = this.handleAnyOfRelationDatas(typeAnnotation, file, attrKey, path);
       return this.handleAnyOf(result, file, attrKey) as any;
     }
 
@@ -807,13 +831,14 @@ export default class typescriptToFileDatas {
           file,
           attrKey,
           namespaces,
+          path
         });
         if (res) {
           params.push(res);
         }
       });
       // 泛型
-      if (typeof 'refKey' !== 'undefined' && !this.filterRefKeywords.includes(refKey as string)) {
+      if (typeof refKey !== 'undefined' && !this.filterRefKeywords.find(item => (refKey as string).startsWith(item))) {
         return { extraParams: params };
       }
       if (params.length < 2) {
@@ -828,6 +853,7 @@ export default class typescriptToFileDatas {
         file,
         attrKey,
         namespaces,
+        path
       });
     }
 
@@ -838,6 +864,7 @@ export default class typescriptToFileDatas {
         file,
         attrKey,
         namespaces,
+        path
       });
       return type ? { type: 'array', items: type } : null;
     }
@@ -849,6 +876,7 @@ export default class typescriptToFileDatas {
         file,
         attrKey,
         namespaces,
+        path
       });
       return type;
     }
@@ -885,14 +913,14 @@ export default class typescriptToFileDatas {
    * @param {any} key
    * @returns
    */
-  handleAnyOfRelationDatas(typeAnnotation: AnyOption, file?: string, attrKey?: string): AnyOption {
+  handleAnyOfRelationDatas(typeAnnotation: AnyOption, file?: string, attrKey?: string, path?: any): AnyOption {
     const enumTypes = new Set();
     const enum_: AnyOption = { enum: [] };
     const result: AnyOption[] = [];
 
-    typeAnnotation.types.forEach((item: AnyOption) => {
+    typeAnnotation.types.forEach((item: AnyOption, index: number) => {
       const type: AnyOption =
-        this.transformTypeAnnotation({ typeAnnotation: item, file, attrKey }) || {};
+        this.transformTypeAnnotation({ typeAnnotation: item, file, attrKey, path, index }) || {};
       if (!type) return;
       /**
        * 特殊处理 可变类型处理 例如： name: '1' | 2 | '3'| true| null|undefined | string[] | A
